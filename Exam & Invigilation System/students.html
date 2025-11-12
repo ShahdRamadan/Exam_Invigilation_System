@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إدارة الطلاب</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="Styles/students.css">
+</head>
+
+<body>
+    <aside class="sidebar" role="navigation">
+        <div>
+            <div class="brand">الجامعة <i class="fa-solid fa-graduation-cap" style="margin-left:8px"></i></div>
+            <nav class="nav">
+                <a href="#" data-section="dashboard"><i class="fa-solid fa-palette"></i> <span>لوحة التحكم</span></a>
+                <a href="#" class="active" data-section="students"><i class="fa-solid fa-users"></i>
+                    <span>الطلاب</span></a>
+                <a href="invigilators.html" data-section="observers"><i class="fa-solid fa-user-check"></i>
+                    <span>المراقبون</span></a>
+                <a href="#" data-section="add-schedule"><i class="fa-solid fa-calendar-plus"></i> <span>إضافة
+                        جدول</span></a>
+                <a href="#" data-section="conflicts"><i class="fa-solid fa-triangle-exclamation"></i>
+                    <span>التعارضات</span></a>
+                <a href="#" data-section="rooms"><i class="fa-solid fa-door-closed"></i> <span>جدول القاعات</span></a>
+            </nav>
+        </div>
+        <div class="logout"><a href="#" style="color:#fff;text-decoration:none"><i
+                    class="fa-solid fa-arrow-right-from-bracket"></i> تسجيل الخروج</a></div>
+    </aside>
+
+    <main class="main">
+        <div class="topbar card">
+            <h1>أهلاً اسم المستخدم</h1>
+            <div class="user muted"><i class="fa-regular fa-user-circle"></i> مسؤول النظام</div>
+        </div>
+
+        <section class="content">
+            <h2 class="section-title">قائمة الطلاب</h2>
+
+            <div class="controls">
+                <div class="filter-group">
+                    <input type="text" id="searchInput" class="form-control"
+                        placeholder="بحث بالاسم أو الرقم الجامعي...">
+                    <select id="yearFilter" class="form-control">
+                        <option value="">كل الفرق</option>
+                        <option value="1">الفرقة الأولى</option>
+                        <option value="2">الفرقة الثانية</option>
+                        <option value="3">الفرقة الثالثة</option>
+                        <option value="4">الفرقة الرابعة</option>
+                    </select>
+                </div>
+                <button class="btn add" id="addBtn"><i class="fa-solid fa-plus"></i> إضافة طالب</button>
+            </div>
+
+            <div class="card" style="padding:14px;">
+                <table id="studentsTable" aria-label="قائمة الطلاب">
+                    <thead>
+                        <tr>
+                            <th>رقم</th>
+                            <th>الاسم</th>
+                            <th>الرقم الجامعي</th>
+                            <th>البريد الإلكتروني</th>
+                            <th>الفرقة</th>
+                            <th>القسم</th>
+                            <th>الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+
+        </section>
+    </main>
+
+    <div id="modalBackdrop" class="modal-backdrop" style="display:none;align-items:center;justify-content:center">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <h3 id="modalTitle">إضافة طالب</h3>
+
+            <div style="margin-top:10px">
+                <div class="form-row">
+                    <div class="col"><label>الاسم</label><input id="f_name" type="text" placeholder="مثال: علي حسن">
+                    </div>
+                    <div class="col"><label>الرقم الجامعي</label><input id="f_studentId" type="text"
+                            placeholder="2024001"></div>
+                </div>
+                <div class="form-row">
+                    <div class="col"><label>البريد الإلكتروني</label><input id="f_email" type="email"
+                            placeholder="example@domain.com"></div>
+                    <div class="col"><label>الفرقة</label>
+                        <select id="f_year">
+                            <option value="1">الأولى</option>
+                            <option value="2">الثانية</option>
+                            <option value="3">الثالثة</option>
+                            <option value="4">الرابعة</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col"><label>القسم</label><input id="f_department" type="text"
+                            placeholder="مثال: علوم الحاسب"></div>
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn btn-secondary" id="closeModal">إلغاء</button>
+                <button class="btn add" id="saveModal">حفظ</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="students.js"></script>
+</body>
+
+</html>
