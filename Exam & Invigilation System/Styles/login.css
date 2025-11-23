@@ -21,7 +21,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* هذا السطر مهم جداً لمنع ظهور واختفاء السكرول بار */
     overflow-y: scroll;
     background: #eef2f6;
     position: relative;
@@ -29,12 +28,10 @@ body {
     padding: 40px 20px;
 }
 
-/* تعديل الخلفية لتكون ثابتة (Fixed) عشان متعملش رفة */
+
 .background-mesh {
     position: fixed;
-    /* تغيير من absolute إلى fixed */
     width: 200vw;
-    /* استخدام vw بدلاً من % */
     height: 200vh;
     top: -50%;
     left: -50%;
@@ -46,7 +43,6 @@ body {
     animation: rotateBackground 20s linear infinite;
     z-index: 0;
     pointer-events: none;
-    /* عشان الماوس ميتفاعلش معاها */
 }
 
 @keyframes rotateBackground {
@@ -59,7 +55,6 @@ body {
     }
 }
 
-/* --- الكارت الرئيسي --- */
 .login-container {
     background: rgba(255, 255, 255, 0.95);
     width: 100%;
@@ -77,7 +72,6 @@ body {
     transform: translateY(-5px);
 }
 
-/* --- الشعار والعنوان --- */
 .brand-section {
     text-align: center;
     margin-bottom: 35px;
@@ -114,7 +108,6 @@ body {
     font-weight: 600;
 }
 
-/* --- Role Tabs (نظام التابات المتحرك) --- */
 .role-tabs {
     display: flex;
     position: relative;
@@ -146,7 +139,6 @@ body {
     right: 5px;
     height: calc(100% - 10px);
     width: calc(33.33% - 7px);
-    /* ثلث المساحة تقريباً */
     background: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
@@ -154,7 +146,6 @@ body {
     z-index: 1;
 }
 
-/* حركة السلايدر */
 #admin:checked~.slider {
     transform: translateX(0);
 }
@@ -167,12 +158,10 @@ body {
     transform: translateX(calc(-200% - 10px));
 }
 
-/* تغيير لون النص عند التحديد */
 input:checked+label {
     color: var(--primary);
 }
 
-/* --- Modern Inputs (Floating Labels) --- */
 .input-group {
     margin-bottom: 20px;
 }
@@ -200,7 +189,6 @@ input:checked+label {
     border: none;
     outline: none;
     padding: 20px 15px 5px 45px;
-    /* مساحة للأيقونة */
     font-size: 15px;
     font-weight: 600;
     color: var(--text-main);
@@ -220,7 +208,6 @@ input:checked+label {
     z-index: 1;
 }
 
-/* حركة الليبل للأعلى عند الكتابة */
 .field input:focus+label,
 .field input:not(:placeholder-shown)+label {
     top: 15px;
@@ -246,7 +233,6 @@ input:checked+label {
     color: var(--primary);
 }
 
-/* --- Button & Footer --- */
 .actions {
     text-align: left;
     margin-bottom: 25px;
@@ -259,7 +245,6 @@ input:checked+label {
     font-weight: 700;
 }
 
-/* تأكدي أن هذا الكود موجود في login.css */
 .btn-submit {
     width: 100%;
     padding: 16px;
@@ -277,7 +262,6 @@ input:checked+label {
     transition: all 0.3s;
     box-shadow: 0 10px 20px rgba(0, 88, 122, 0.2);
     margin-top: 20px;
-    /* مسافة فوق الزر */
 }
 
 .btn-submit:hover {
@@ -300,10 +284,10 @@ input:checked+label {
     text-decoration: none;
 }
 
-/* --- Mobile --- */
 @media (max-width: 480px) {
     .login-container {
         padding: 30px 20px;
         max-width: 90%;
     }
+
 }
