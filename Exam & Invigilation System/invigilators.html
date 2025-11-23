@@ -114,8 +114,12 @@
                                 </div>
                             </td>
                             <td>
-                                <a href="#" class="small-btn edit"><i class="fa-solid fa-pen"></i></a>
-                                <a href="#" class="small-btn del"><i class="fa-solid fa-trash"></i></a>
+                                <a href="#editInvigilatorModal" class="small-btn edit" title="تعديل البيانات">
+                                    <i class="fa-solid fa-pen"></i>
+                                </a>
+                                <a href="#deleteInvigilatorModal" class="small-btn del" title="حذف المراقب">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
                             </td>
                         </tr>
                     </tbody>
@@ -155,7 +159,6 @@
                         <label>كلمة المرور</label>
                         <div class="input-icon-wrapper">
                             <input type="password" name="password" id="modal_password" placeholder="******">
-
                             <i class="fa-solid fa-eye toggle-pass-btn"
                                 onclick="togglePassword('modal_password', this)"></i>
                         </div>
@@ -183,6 +186,104 @@
                 <div class="modal-actions">
                     <a href="#" class="btn-secondary">إلغاء</a>
                     <button type="submit" class="btn add">حفظ البيانات</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="editInvigilatorModal" class="modal-overlay">
+        <div class="modal">
+            <h3>
+                <i class="fa-solid fa-user-pen" style="color:var(--warning); margin-left:10px;"></i>
+                تعديل بيانات المراقب
+            </h3>
+            <form action="/invigilators/update" method="POST" class="styled-form">
+
+                <input type="hidden" name="invigilator_id" value="1">
+
+                <h4 class="form-section-title"><i class="fa-solid fa-user-gear"></i> البيانات والحساب</h4>
+
+                <div class="form-row">
+                    <div class="col" style="flex: 1.5;">
+                        <label>الاسم الرباعي <span class="required">*</span></label>
+                        <div class="input-icon-wrapper">
+                            <i class="fa-solid fa-user"></i>
+                            <input type="text" name="full_name" value="شهد رمضان" required>
+                        </div>
+                    </div>
+
+                    <div class="col" style="flex: 1;">
+                        <label>الوظيفة</label>
+                        <div class="input-icon-wrapper">
+                            <i class="fa-solid fa-briefcase"></i>
+                            <input type="text" name="job_title" value="موظف شئون">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col">
+                        <label>كلمة المرور (اتركها فارغة لعدم التغيير)</label>
+                        <div class="input-icon-wrapper">
+                            <input type="password" name="password" id="modal_edit_password" placeholder="******">
+                            <i class="fa-solid fa-eye toggle-pass-btn"
+                                onclick="togglePassword('modal_edit_password', this)"></i>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <label>رقم الهاتف</label>
+                        <div class="input-icon-wrapper">
+                            <i class="fa-solid fa-phone-flip"></i>
+                            <input type="tel" name="phone" value="0123456789">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col">
+                        <label>البريد الإلكتروني</label>
+                        <div class="input-icon-wrapper">
+                            <i class="fa-solid fa-envelope"></i>
+                            <input type="email" name="email" value="shahd@hurghada.edu.eg">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <a href="#" class="btn-secondary">إلغاء</a>
+                    <button type="submit" class="btn add" style="background-color: var(--warning); color: #000;">
+                        حفظ التعديلات
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="deleteInvigilatorModal" class="modal-overlay">
+        <div class="modal" style="width: 400px; text-align: center;">
+
+            <div style="margin-bottom: 20px;">
+                <i class="fa-solid fa-triangle-exclamation" style="font-size: 50px; color: var(--danger);"></i>
+            </div>
+
+            <h3 style="justify-content: center; border: none; margin-bottom: 10px;">هل أنت متأكد؟</h3>
+
+            <p style="color: var(--muted); margin-bottom: 25px;">
+                أنت على وشك حذف المراقب: <br>
+                <span style="color: #000; font-weight: bold;">شهد رمضان</span>
+                <br>
+                <span style="font-size: 13px; color: var(--danger);">سيتم حذف جدول المراقبة الخاص به أيضاً.</span>
+            </p>
+
+            <form action="/invigilators/delete" method="POST">
+                <input type="hidden" name="invigilator_id" value="1">
+
+                <div class="modal-actions" style="justify-content: center;">
+                    <a href="#" class="btn-secondary">تراجع</a>
+                    <button type="submit" class="btn" style="background-color: var(--danger); color: white;">
+                        نعم، احذف
+                    </button>
                 </div>
             </form>
         </div>
@@ -230,7 +331,7 @@
     </div>
 
     <script>
-        //for password of invigilators
+        // دالة إظهار/إخفاء كلمة المرور
         function togglePassword(inputId, iconElement) {
             const input = document.getElementById(inputId);
 
@@ -250,9 +351,7 @@
 
             tableEyes.forEach(icon => {
                 icon.addEventListener("click", function () {
-
                     const input = this.previousElementSibling;
-
                     if (input.type === "password") {
                         input.type = "text";
                         this.classList.remove("fa-eye");
