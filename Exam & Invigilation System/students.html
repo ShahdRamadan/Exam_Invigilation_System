@@ -105,10 +105,36 @@
                             <th>الإجراءات</th>
                         </tr>
                     </thead>
-
                     <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>شهد رمضان</td>
+                            <td>1234567</td>
+                            <td>shahd@hurghada.edu.eg</td>
+                            <td>الرابعة</td>
+                            <td>علوم الحاسب</td>
+                            <td>
+                                <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+                                    <span
+                                        style="background: #e0f2fe; color: #0369a1; padding: 4px 10px; border-radius: 15px; font-size: 12px; font-weight: bold; border: 1px solid #bae6fd;">
+                                        6 مواد
+                                    </span>
+                                    <a href="#viewSubjectsModal" class="small-btn show" title="عرض المواد"
+                                        style="padding: 5px 8px;">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <a href="#editStudentModal" class="small-btn edit" title="تعديل البيانات">
+                                    <i class="fa-solid fa-pen"></i>
+                                </a>
 
-
+                                <a href="#deleteStudentModal" class="small-btn del" title="حذف الطالب">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -234,10 +260,148 @@
         </div>
     </div>
 
+    <div id="viewSubjectsModal" class="modal-overlay">
+        <div class="modal" style="width: 700px;">
+            <h3 style="border-bottom:none; margin-bottom:10px;">
+                المواد المسجلة للطالب:
+                <span style="color:var(--accent)"> شهد رمضان</span>
+            </h3>
 
+            <div style="border:1px solid #e2e8f0; border-radius:8px; overflow:hidden;">
+                <table style="margin:0;">
+                    <thead style="background:#f1f5f9;">
+                        <tr>
+                            <th style="padding:10px; font-size:13px;">كود المادة</th>
+                            <th style="padding:10px; font-size:13px;">اسم المقرر</th>
+                            <th style="padding:10px; font-size:13px;">الفرقة الأصلية</th>
+                            <th style="padding:10px; font-size:13px;">الساعات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <td>CS101</td>
+                        <td>مقدمة في الحاسب</td>
+                        <td>
+                            <span
+                                style="background:#e2e8f0; color:#475569; padding:2px 8px; border-radius:4px; font-size:12px; font-weight:bold;">
+                                الفرقة الأولى
+                            </span>
+                        </td>
+                        <td>3</td>
+                        </tr>
+
+                        <tr>
+                            <td>CS201</td>
+                            <td>هياكل بيانات</td>
+                            <td>
+                                <span
+                                    style="background:#e0f2fe; color:#0369a1; padding:2px 8px; border-radius:4px; font-size:12px; font-weight:bold;">
+                                    الفرقة الثانية
+                                </span>
+                            </td>
+                            <td>3</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="modal-actions">
+                <a href="#" class="btn-close-modal">
+                    <i class="fa-solid fa-xmark"></i> إغلاق النافذة
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="editStudentModal" class="modal-overlay">
+        <div class="modal">
+            <h3>
+                <i class="fa-solid fa-user-pen" style="color:var(--warning); margin-left:10px;"></i>
+                تعديل بيانات الطالب
+            </h3>
+
+            <form action="/students/update" method="POST">
+
+                <input type="hidden" name="student_id" value="1">
+
+                <h4 class="form-section-title">1. البيانات الأساسية</h4>
+
+                <div class="form-row">
+                    <div class="col">
+                        <label>الاسم الرباعي</label>
+                        <input type="text" name="full_name" value="شهد رمضان" required>
+                    </div>
+                    <div class="col">
+                        <label>الرقم الجامعي</label>
+                        <input type="number" name="student_code" value="1234567" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col">
+                        <label>البريد الإلكتروني</label>
+                        <input type="email" name="email" value="shahd@hurghada.edu.eg">
+                    </div>
+                    <div class="col">
+                        <label>الفرقة</label>
+                        <select name="current_level" style="background-color: #f0f9ff;">
+                            <option value="1">الفرقة الأولى</option>
+                            <option value="2">الفرقة الثانية</option>
+                            <option value="3">الفرقة الثالثة</option>
+                            <option value="4" selected>الفرقة الرابعة</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col">
+                        <label>القسم</label>
+                        <select name="department_id">
+                            <option value="2" selected>علوم الحاسب</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <a href="#" class="btn-secondary">إلغاء</a>
+                    <button type="submit" class="btn add" style="background-color: var(--warning); color: #000;">
+                        حفظ التعديلات
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+    <div id="deleteStudentModal" class="modal-overlay">
+        <div class="modal" style="width: 400px; text-align: center;">
+
+            <div style="margin-bottom: 20px;">
+                <i class="fa-solid fa-triangle-exclamation" style="font-size: 50px; color: var(--danger);"></i>
+            </div>
+
+            <h3 style="justify-content: center; border: none; margin-bottom: 10px;">هل أنت متأكد؟</h3>
+
+            <p style="color: var(--muted); margin-bottom: 25px;">
+                أنت على وشك حذف الطالب: <br>
+                <span style="color: #000; font-weight: bold;">شهد رمضان</span>
+                <br>
+                <span style="font-size: 13px; color: var(--danger);">لا يمكن التراجع عن هذا الإجراء.</span>
+            </p>
+
+            <form action="/students/delete" method="POST">
+                <input type="hidden" name="student_id" value="1">
+
+                <div class="modal-actions" style="justify-content: center;">
+                    <a href="#" class="btn-secondary">تراجع</a>
+                    <button type="submit" class="btn" style="background-color: var(--danger); color: white;">
+                        نعم، احذف
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 
 </body>
 
-
 </html>
-
