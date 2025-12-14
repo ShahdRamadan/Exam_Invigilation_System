@@ -24,21 +24,26 @@
             <p class="subtitle">نظام الامتحانات والمراقبة</p>
         </div>
 
-        <form action="/login" method="POST" class="login-form">
+
+        <form id="loginForm" action="/login/admin" method="POST" class="login-form">
 
             <div class="role-tabs">
-                <input type="radio" id="admin" name="role" value="admin" checked>
+                <input type="radio" id="admin" name="role" value="admin" checked data-action="/login/admin">
                 <label for="admin">أدمن</label>
 
-                <input type="radio" id="student" name="role" value="student">
+                <input type="radio" id="student" name="role" value="student" data-action="/login/student">
                 <label for="student">طالب</label>
 
-                <input type="radio" id="proctor" name="role" value="proctor">
+                <input type="radio" id="proctor" name="role" value="proctor" data-action="/login/proctor">
                 <label for="proctor">ملاحظ / مراقب</label>
 
                 <div class="slider"></div>
             </div>
 
+            <!-- this for error message -->
+            <div class="error-message" style="color: #e3342f; margin-bottom: 15px; text-align: center;">
+                <!-- شكل تجريبي:  الرقم الجامعي أو كلمة المرور غير صحيحين. الرجاء المحاولة مرة أخرى. -->
+            </div>
             <div class="input-group">
                 <div class="field">
                     <input type="text" name="username" id="username" placeholder=" " required>
@@ -65,23 +70,22 @@
 
         </form>
 
-        <div class="footer-text" id="signup-section">
-            طالب جديد؟ <a href="sign_up.html">تفعيل الحساب الآن</a>
-        </div>
     </div>
 
     <script>
-        // سكربت بسيط للتحكم في الواجهة
-        const studentRadio = document.getElementById('student');
-        const signupSection = document.getElementById('signup-section');
+
+        const loginForm = document.getElementById('loginForm');
         const radios = document.getElementsByName('role');
 
-        function checkRole() {
-            signupSection.style.opacity = studentRadio.checked ? '1' : '0';
-            signupSection.style.pointerEvents = studentRadio.checked ? 'all' : 'none';
+        function updateFormAction() {
+
+            const selectedRadio = Array.from(radios).find(radio => radio.checked);
+            if (selectedRadio) {
+                loginForm.action = selectedRadio.getAttribute('data-action');
+            }
         }
 
-        radios.forEach(radio => radio.addEventListener('change', checkRole));
+        radios.forEach(radio => radio.addEventListener('change', updateFormAction));
 
         function togglePass() {
             const passInput = document.getElementById('password');
@@ -94,7 +98,8 @@
                 icon.classList.replace('fa-eye-slash', 'fa-eye');
             }
         }
-        checkRole();
+
+        updateFormAction();
 
     </script>
 </body>
