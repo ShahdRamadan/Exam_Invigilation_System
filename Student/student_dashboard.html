@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بوابة الطالب | جامعة الغردقة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../Styles/index.css">
+</head>
+
+<body>
+
+    <aside class="sidebar">
+        <div>
+            <div class="brand">
+                <img src="../Images/UNI_LOGO.png" alt="شعار الجامعة" class="brand-logo">
+                <span>جامعة الغردقة</span>
+            </div>
+
+            <nav class="nav">
+                <a href="#" class="active">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <span>جدول الامتحانات</span>
+                </a>
+                <a href="student_profile.html">
+                    <i class="fa-solid fa-user-gear"></i>
+                    <span>الملف الشخصي</span>
+                </a>
+            </nav>
+        </div>
+
+        <div class="logout">
+            <a href="../login.html"><i class="fa-solid fa-arrow-right-from-bracket"></i> تسجيل الخروج</a>
+        </div>
+    </aside>
+
+    <main class="main">
+        <div class="topbar">
+            <div class="student-header">
+
+
+                <div style="display: flex; align-items: center; gap: 15px;">
+
+                    <img id="profile_pic" src="../Images/profile.png" alt="Profile"
+                        style="width: 65px; height: 65px; border-radius: 50%; object-fit: cover; border: 2px solid #e2e8f0;">
+
+                    <div>
+                        <h1 id="student_name" style="margin: 0; font-size: 22px; color: var(--primary);">شهد رمضان</h1>
+
+                        <div style="font-size: 15px; color: #000; margin-top: 5px; font-weight: 600;">
+
+                            <span id="academic_year">الفرقة الرابعة</span>
+
+                            <span style="color: #cbd5e1; margin: 0 8px;">|</span>
+
+                            <span id="department_name">علوم الحاسب</span>
+
+                            <span style="color: #cbd5e1; margin: 0 8px;">|</span>
+
+                            <span>الرقم الجامعي (ID) : </span>
+                            <span id="seat_number" style="color: var(--primary); font-weight: 700;">1234</span>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="user">
+                <i class="fa-solid fa-graduation-cap"></i> Student
+            </div>
+        </div>
+
+        <section class="content">
+
+            <div class="filter-card" style="border-right-color: var(--warning); background: #fffbeb;">
+                <div style="display: flex; gap: 15px; align-items: center;">
+                    <i class="fa-solid fa-bullhorn" style="font-size: 24px; color: #b45309;"></i>
+                    <div>
+                        <h4 style="margin: 0 0 5px 0; color: #b45309;">تنبيه هام</h4>
+                        <p style="margin: 0; font-size: 13px; color: #92400e;">
+                            يرجى الحضور قبل موعد الامتحان بـ 15 دقيقة وإحضار البطاقة الجامعية وكل ما يلزم للأمتحان
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title">
+                جدول الامتحانات - <span id="current_semester_student">...</span>
+            </h2>
+
+            <div class="card">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>المادة</th>
+                            <th>اليوم والتاريخ</th>
+                            <th>الوقت</th>
+                            <th>مكان اللجنة</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tbody>
+                        <tr>
+                            <td style="font-weight: bold; color: var(--primary);">نظم تشغيل</td>
+                            <td>السبت <br> <span style="font-size: 12px; color: var(--muted);">2025-05-15</span></td>
+                            <td>09:00 ص - 12:00 م</td>
+                            <td>
+                                <span
+                                    style="background: #f1f5f9; padding: 5px 10px; border-radius: 6px; font-size: 13px;">
+                                    مدرج (أ)
+                                </span>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                    </tbody>
+                </table>
+                <!--in case there is no exams yet-->
+                <div id="no-exams-message"
+                    style="display: none; text-align: center; padding: 40px 20px; color: #64748b;">
+                    <i class="fa-regular fa-calendar-xmark"
+                        style="font-size: 50px; margin-bottom: 15px; color: #cbd5e1;"></i>
+                    <p style="margin: 0; font-size: 16px; font-weight: 600;">لا توجد امتحانات حالياً</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script>
+        function updateStudentSemester() {
+            const date = new Date();
+            const currentMonth = date.getMonth() + 1; // الشهور من 1 لـ 12
+
+            let semesterName = "";
+
+            // الترم الأول: شهور 9, 10, 11, 12, 1
+            if (currentMonth >= 9 || currentMonth === 1) {
+                semesterName = "الفصل الدراسي الأول";
+            }
+            // الترم الثاني: شهور 2, 3, 4, 5, 6
+            else if (currentMonth >= 2 && currentMonth <= 6) {
+                semesterName = "الفصل الدراسي الثاني";
+            }
+            // الترم الصيفي: شهور 7, 8
+            else {
+                semesterName = "الفصل الدراسي الصيفي";
+            }
+
+            // تحديث العنوان
+            const element = document.getElementById("current_semester_student");
+            if (element) {
+                element.textContent = semesterName;
+            }
+        }
+
+        // تشغيل الكود فوراً
+        updateStudentSemester();
+    </script>
+</body>
+
+</html>

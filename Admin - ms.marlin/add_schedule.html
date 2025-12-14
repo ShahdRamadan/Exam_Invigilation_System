@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جدول الامتحانات | جامعة الغردقة</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="../Styles/index.css">
+</head>
+
+<body>
+
+    <aside class="sidebar">
+        <div>
+            <div class="brand">
+                <img src="../Images/UNI_LOGO.png" alt="شعار الجامعة" class="brand-logo">
+                <span>جامعة الغردقة</span>
+            </div>
+
+            <nav class="nav">
+                <a href="#" data-section="dashboard">
+                    <i class="fa-solid fa-palette"></i>
+                    <span>لوحة التحكم</span>
+                </a>
+                <a href="students.html" data-section="students">
+                    <i class="fa-solid fa-users"></i>
+                    <span>الطلاب</span>
+                </a>
+                <a href="subjects.html" data-section="subjects">
+                    <i class="fa-solid fa-book-open"></i>
+                    <span>المواد الدراسية</span>
+                </a>
+                <a href="invigilators.html" data-section="observers">
+                    <i class="fa-solid fa-user-check"></i>
+                    <span>المراقبون</span>
+                </a>
+                <a href="rooms.html" data-section="rooms">
+                    <i class="fa-solid fa-door-closed"></i>
+                    <span>القاعات</span>
+                </a>
+                <a href="add_schedule.html" class="active" data-section="add-schedule">
+                    <i class="fa-solid fa-calendar-plus"></i>
+                    <span>إضافة جدول</span>
+                </a>
+                <a href="#" data-section="conflicts">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <span>التعارضات</span>
+                </a>
+            </nav>
+        </div>
+
+        <div class="logout">
+            <a href="#">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                تسجيل الخروج
+            </a>
+        </div>
+    </aside>
+
+    <main class="main">
+        <div class="topbar">
+            <h1>أهلاً، مسؤول النظام</h1>
+            <div class="user">
+                <i class="fa-regular fa-user-circle"></i> Admin
+            </div>
+        </div>
+
+        <section class="content">
+            <h2 class="section-title">جدول الامتحانات</h2>
+
+            <div class="controls">
+                <form action="" method="GET" class="filter-group" style="flex: 1;">
+
+
+                    <select name="grade_level" style="width: 150px;">
+                        <option value="">كل الفرق</option>
+                        <option value="1">الفرقة الأولى</option>
+                        <option value="2">الفرقة الثانية</option>
+                        <option value="3">الفرقة الثالثة</option>
+                        <option value="4">الفرقة الرابعة</option>
+                    </select>
+
+                    <select name="department_id" style="width: 150px;">
+                        <option value="">كل الأقسام</option>
+                        <option value="1">عام</option>
+                        <option value="2">علوم الحاسب</option>
+                        <option value="3">نظم معلومات</option>
+                    </select>
+                    <button type="submit" class="btn"
+                        style="background-color: var(--primary); color: white; display: flex; align-items: center; gap: 8px;"
+                        title="تنفيذ البحث">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <span>بحث</span>
+                    </button>
+                </form>
+
+                <a href="#examModal" class="btn add">
+                    <i class="fa-solid fa-plus"></i> إضافة امتحان
+                </a>
+            </div>
+
+            <div class="card">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>اليوم</th>
+                            <th>المادة</th>
+                            <th>التاريخ</th>
+                            <th>الوقت</th>
+                            <th>اللجنة</th>
+                            <th>المراقب</th>
+                            <th>إجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>الثلاثاء</td>
+                            <td>رياضيات 1</td>
+                            <td>2025-06-10</td>
+                            <td>09:00 ص</td>
+                            <td>قاعة 1</td>
+                            <td>د. أحمد</td>
+                            <td>
+                                <a href="#examModal" class="small-btn edit" title="تعديل">
+                                    <i class="fa-solid fa-pen"></i>
+                                </a>
+
+                                <a href="#deleteExamModal" class="small-btn del" title="حذف">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>الخميس</td>
+                            <td>برمجة هيكلية</td>
+                            <td>2025-06-12</td>
+                            <td>11:00 ص</td>
+                            <td>مدرج (أ)</td>
+                            <td>د. سارة</td>
+                            <td>
+                                <a href="#examModal" class="small-btn edit" title="تعديل">
+                                    <i class="fa-solid fa-pen"></i>
+                                </a>
+
+                                <a href="#deleteExamModal" class="small-btn del" title="حذف">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <div id="examModal" class="modal-overlay">
+        <div class="modal">
+            <h3>
+                <i class="fa-solid fa-file-pen" style="color:var(--warning); margin-left:10px;"></i>
+                بيانات الامتحان
+            </h3>
+
+            <form action="/exams/save" method="POST">
+
+                <input type="hidden" name="exam_id" value="">
+
+                <div class="form-row">
+                    <div class="col">
+                        <label>الفرقة الدراسية</label>
+                        <select name="grade_level">
+                            <option value="">اختر الفرقة...</option>
+                            <option value="1">الفرقة الأولى</option>
+                            <option value="2">الفرقة الثانية</option>
+                            <option value="3">الفرقة الثالثة</option>
+                            <option value="4">الفرقة الرابعة</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label>القسم</label>
+                        <select name="department_id">
+                            <option value="1">عام </option>
+                            <option value="2">علوم حاسب</option>
+                            <option value="3">نظم معلومات</option>
+                            <option value="4">الذكاء الاصطناعي</option>
+                            <option value="5">تكنولوجيا المعلومات </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col">
+                        <label>المادة الدراسية</label>
+                        <select name="subject_id" required>
+                            <option value="">-- سيتم تحميل المواد بناءً على الفرقة --</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col">
+                        <label>اليوم</label>
+                        <select name="day">
+                            <option value="السبت">السبت</option>
+                            <option value="الأحد">الأحد</option>
+                            <option value="الاثنين">الاثنين</option>
+                            <option value="الثلاثاء">الثلاثاء</option>
+                            <option value="الأربعاء">الأربعاء</option>
+                            <option value="الخميس">الخميس</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label>تاريخ الامتحان</label>
+                        <input type="date" name="exam_date" required>
+                    </div>
+                    <div class="col">
+                        <label>الوقت</label>
+                        <input type="time" name="exam_time" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col">
+                        <label>القاعة / اللجنة</label>
+                        <div class="input-icon-wrapper">
+                            <select name="room_id" required>
+                                <option value="">اختر القاعة...</option>
+                                <option value="1">مدرج (أ)</option>
+                                <option value="2">معمل الحاسب 1</option>
+                                <option value="3">قاعة 5</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <label>الملاحظ</label>
+                        <div class="input-icon-wrapper">
+                            <select name="invigilator_id" required>
+                                <option value="">اختر الملاحظ...</option>
+                                <option value="10">د. أحمد (أستاذ مساعد)</option>
+                                <option value="15">أ. سارة (معيد)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <a href="#" class="btn-secondary">إلغاء</a>
+                    <button type="submit" class="btn add">حفظ البيانات</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="deleteExamModal" class="modal-overlay">
+        <div class="modal" style="width: 400px; text-align: center;">
+            <div style="margin-bottom: 20px;">
+                <i class="fa-solid fa-triangle-exclamation" style="font-size: 50px; color: var(--danger);"></i>
+            </div>
+
+            <h3 style="justify-content: center; border: none; margin-bottom: 10px;">تأكيد الحذف</h3>
+            <p style="color: var(--muted); margin-bottom: 25px;">هل أنت متأكد من حذف هذا الامتحان؟</p>
+
+            <form action="/exams/delete" method="POST">
+                <input type="hidden" name="exam_id" value="">
+
+                <div class="modal-actions" style="justify-content: center;">
+                    <a href="#" class="btn-secondary">تراجع</a>
+                    <button type="submit" class="btn" style="background-color: var(--danger); color: white;">نعم،
+                        احذف</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>

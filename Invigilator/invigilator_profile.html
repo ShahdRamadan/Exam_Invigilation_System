@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الملف الشخصي | بوابة المراقب</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../Styles/index.css">
+</head>
+
+<body>
+
+    <aside class="sidebar">
+        <div>
+            <div class="brand">
+                <img src="../Images/UNI_LOGO.png" alt="شعار الجامعة" class="brand-logo">
+                <span>جامعة الغردقة</span>
+            </div>
+
+            <nav class="nav">
+                <a href="invigilator_dashboard.html">
+                    <i class="fa-solid fa-clipboard-list"></i>
+                    <span>جدول المراقبة</span>
+                </a>
+                <a href="report_violation.html">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <span>الإبلاغ عن مخالفة</span>
+                </a>
+                <a href="invigilator_profile.html" class="active">
+                    <i class="fa-solid fa-user-tie"></i>
+                    <span>الملف الشخصي</span>
+                </a>
+            </nav>
+        </div>
+
+        <div class="logout">
+            <a href="../login.html"><i class="fa-solid fa-arrow-right-from-bracket"></i> تسجيل الخروج</a>
+        </div>
+    </aside>
+
+    <main class="main">
+
+        <div class="topbar">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <img id="profile_pic_top" src="../Images/profile.png" alt="Profile"
+                    style="width: 65px; height: 65px; border-radius: 50%; object-fit: cover; border: 2px solid #e2e8f0;">
+                <div>
+                    <h1 id="invigilator_name_top" style="margin: 0; font-size: 22px; color: var(--primary);">د. احمد
+                        محمد</h1>
+                    <div style="font-size: 15px; color: #000; margin-top: 5px; font-weight: 600;">
+                        <span id="job_title">مدرس مساعد</span>
+                        <span style="color: #cbd5e1; margin: 0 8px;">|</span>
+                        <span id="department_name">نظم المعلومات</span>
+                    </div>
+                </div>
+            </div>
+            <div class="user">
+                <i class="fa-solid fa-id-badge"></i> Invigilator
+            </div>
+        </div>
+
+        <section class="content">
+            <h2 class="section-title">إعدادات الحساب الشخصي</h2>
+
+            <form action="/invigilator/update-profile" method="POST" enctype="multipart/form-data">
+
+                <input type="hidden" name="invigilator_id" value="5501">
+
+                <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+
+                    <div class="card" style="width: 300px; text-align: center; padding: 30px; height: fit-content;">
+                        <div style="position: relative; width: 150px; height: 150px; margin: 0 auto 20px;">
+                            <img id="profile_preview" src="../Images/profile.png" alt="Profile Picture"
+                                style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 4px solid #f1f5f9;">
+
+                            <label for="upload-photo" title="تغيير الصورة"
+                                style="position: absolute; bottom: 5px; left: 5px; background: var(--primary); color: #fff; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 2px solid #fff;">
+                                <i class="fa-solid fa-camera"></i>
+                            </label>
+
+                            <input type="file" name="profile_image" id="upload-photo" accept="image/*"
+                                style="display: none;" onchange="previewImage(event)">
+                        </div>
+
+                        <h3 style="margin: 0; color: var(--primary);">د. احمد محمد</h3>
+                        <p style="color: var(--muted); margin-top: 5px; font-size: 13px;">تغيير الصورة الشخصية</p>
+                    </div>
+
+                    <div class="card" style="flex: 1; padding: 30px;">
+
+                        <h4 class="form-section-title">
+                            <i class="fa-solid fa-briefcase" style="font-size: 14px;"></i> البيانات الوظيفية (غير قابلة
+                            للتعديل)
+                        </h4>
+
+                        <div class="form-row">
+                            <div class="col">
+                                <label>الاسم رباعي</label>
+                                <input type="text" name="full_name" value="احمد محمد محمدين" readonly
+                                    style="background-color: #f1f5f9; color: #64748b; cursor: not-allowed;">
+                            </div>
+                            <div class="col">
+                                <label>الرقم القومي</label>
+                                <input type="text" name="national_id" value="123456789" readonly
+                                    style="background-color: #f1f5f9; color: #64748b; cursor: not-allowed;">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col">
+                                <label>الدرجة الوظيفية</label>
+                                <input type="text" name="degree" value="مدرس مساعد" readonly
+                                    style="background-color: #f1f5f9; color: #64748b; cursor: not-allowed;">
+                            </div>
+                            <div class="col">
+                                <label>البريد الإلكتروني الجامعي</label>
+                                <input type="email" name="email" value="ahmed@hurghada.edu.eg" readonly
+                                    style="background-color: #f1f5f9; color: #64748b; cursor: not-allowed;">
+                            </div>
+                        </div>
+
+                        <h4 class="form-section-title" style="margin-top: 30px; border-bottom-color: var(--warning);">
+                            <i class="fa-solid fa-pen-to-square" style="color: var(--warning);"></i> البيانات القابلة
+                            للتعديل
+                        </h4>
+
+                        <div class="form-row">
+                            <div class="col">
+                                <label>رقم الهاتف الشخصي</label>
+                                <div class="input-icon-wrapper">
+                                    <i class="fa-solid fa-phone"></i>
+                                    <input type="tel" name="phone" value="01012345678" required
+                                        style="border-color: #94a3b8; border-radius: 8px;">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <label>العنوان الحالي</label>
+                                <div class="input-icon-wrapper">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                    <input type="text" name="address" value="الغردقة" required
+                                        style="border-color: #94a3b8; border-radius: 8px;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col">
+                                <label style="margin-bottom: 8px; display: block; font-weight: 600;">
+                                    كلمة المرور الجديدة
+                                    <span style="font-size: 11px; color: #64748b; font-weight: normal;">(اتركها فارغة
+                                        إذا لم ترد التغيير)</span>
+                                </label>
+
+                                <div class="input-icon-wrapper"
+                                    style="position: relative; width: 50%; min-width: 250px;">
+                                    <input type="password" name="new_password" id="password_field" placeholder="******"
+                                        style="width: 100%; height: 45px; padding: 10px 15px 10px 40px; border: 1px solid #cbd5e1; border-radius: 8px; outline: none; box-sizing: border-box; font-family: sans-serif;">
+
+                                    <i class="fa-solid fa-eye toggle-pass-btn"
+                                        onclick="togglePassword('password_field', this)"
+                                        style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #94a3b8; font-size: 16px;"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-actions"
+                            style="margin-top: 30px; border-top: 1px solid #e2e8f0; padding-top: 20px; display: flex; gap: 15px;">
+
+                            <button type="submit" class="btn add" style="width: 200px; font-size: 15px;">
+                                <i class="fa-regular fa-floppy-disk"></i> حفظ التغييرات
+                            </button>
+
+                            <a href="invigilator_dashboard.html" class="btn"
+                                style="width: 150px; font-size: 15px; background-color: #fff; color: #64748b; border: 1px solid #cbd5e1; border-radius: 6px; transition: all 0.3s ease; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                                <i class="fa-solid fa-xmark"></i> إلغاء
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        // preview image before uploading
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function () {
+                const output = document.getElementById('profile_preview');
+                output.src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+        //for appear password or not
+        function togglePassword(inputId, iconElement) {
+            const input = document.getElementById(inputId);
+
+            if (input.type === "password") {
+                input.type = "text";
+                iconElement.classList.remove("fa-eye");
+                iconElement.classList.add("fa-eye-slash");
+            } else {
+                input.type = "password";
+                iconElement.classList.remove("fa-eye-slash");
+                iconElement.classList.add("fa-eye");
+            }
+        }
+    </script>
+
+</body>
+
+</html>

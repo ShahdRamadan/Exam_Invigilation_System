@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الإبلاغ عن مخالفة | بوابة المراقب</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../Styles/index.css">
+</head>
+
+<body class="violation-page">
+
+    <aside class="sidebar">
+        <div>
+            <div class="brand">
+                <img src="../Images/UNI_LOGO.png" alt="شعار الجامعة" class="brand-logo">
+                <span>جامعة الغردقة</span>
+            </div>
+
+            <nav class="nav">
+                <a href="invigilator_dashboard.html">
+                    <i class="fa-solid fa-clipboard-list"></i>
+                    <span>جدول المراقبة</span>
+                </a>
+                <a href="report_violation.html" class="active">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <span>الإبلاغ عن مخالفة</span>
+                </a>
+                <a href="invigilator_profile.html">
+                    <i class="fa-solid fa-user-tie"></i>
+                    <span>الملف الشخصي</span>
+                </a>
+            </nav>
+        </div>
+
+        <div class="logout">
+            <a href="../login.html"><i class="fa-solid fa-arrow-right-from-bracket"></i> تسجيل الخروج</a>
+        </div>
+    </aside>
+
+    <main class="main">
+
+        <div class="topbar">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <img id="profile_image" src="../Images/profile.png" alt="Profile"
+                    style="width: 65px; height: 65px; border-radius: 50%; object-fit: cover; border: 2px solid #e2e8f0;">
+
+                <div>
+                    <h1 id="invigilator_name" style="margin: 0; font-size: 22px; color: var(--primary);">د. احمد محمد
+                    </h1>
+                    <div style="font-size: 15px; color: #000; margin-top: 5px; font-weight: 600;">
+                        <span id="invigilator_role">مدرس مساعد</span>
+                        <span style="color: #cbd5e1; margin: 0 8px;">|</span>
+                        <span id="invigilator_department">نظم المعلومات</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="user">
+                <i class="fa-solid fa-id-badge"></i> Invigilator
+            </div>
+        </div>
+
+        <section class="content">
+
+            <h2 class="section-title" style="color: #ef4444;">
+                <i class="fa-solid fa-file-pen"></i> تحرير محضر مخالفة / غش
+            </h2>
+
+            <div class="no-print"
+                style="background-color: #fef2f2; border: 1px solid #ef4444; color: #991b1b; padding: 15px; border-radius: 8px; margin-bottom: 25px; font-size: 14px; line-height: 1.6;">
+                <i class="fa-solid fa-circle-info"></i> <strong>تنبيه هام:</strong>
+                هذا التقرير يعتبر وثيقة رسمية وقانونية. يرجى التأكد من دقة البيانات المدخلة قبل الإرسال. سيتم تحويل
+                الطالب تلقائياً إلى مجلس التأديب بناءً على هذا التقرير.
+            </div>
+
+            <form action="/invigilator/submit-violation" method="POST" enctype="multipart/form-data">
+
+                <input type="hidden" name="invigilator_id" value="5501">
+
+                <div class="card violation-card" style="padding: 30px;">
+
+                    <h4 class="form-section-title">
+                        <i class="fa-regular fa-clock"></i> بيانات وتوقيت الواقعة
+                    </h4>
+
+                    <div class="form-row">
+                        <div class="col">
+                            <label>تاريخ الواقعة</label>
+                            <input type="date" name="incident_date" id="incident_date"
+                                style="background-color: #f1f5f9;">
+                        </div>
+                        <div class="col">
+                            <label>وقت الضبط</label>
+                            <input type="time" name="incident_time" id="incident_time"
+                                style="background-color: #f1f5f9; ">
+                        </div>
+                        <div class="col">
+                            <label>اسم المادة / المقرر</label>
+                            <input type="text" name="subject_name" placeholder="مثال: نظم تشغيل" required>
+                        </div>
+                    </div>
+
+                    <h4 class="form-section-title" style="margin-top: 30px;">
+                        <i class="fa-solid fa-user-injured"></i> بيانات الطالب المخالف
+                    </h4>
+
+                    <div class="form-row">
+                        <div class="col">
+                            <label>رقم الجلوس / ID الطالب</label>
+                            <input type="number" name="student_id" placeholder="أدخل رقم جلوس الطالب" required
+                                style="font-weight: bold; letter-spacing: 1px;">
+                        </div>
+                        <div class="col">
+                            <label>اسم الطالب (ثلاثي أو رباعي)</label>
+                            <input type="text" name="student_name" placeholder="اسم الطالب كما هو مدون ببطاقة الامتحان"
+                                required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col">
+                            <label>الفرقة الدراسية</label>
+                            <select name="student_level"
+                                style="height: 45px; border: 1px solid #cbd5e1; border-radius: 8px; width: 100%; padding: 0 10px;">
+                                <option value="" disabled selected>اختر الفرقة...</option>
+                                <option value="1">الفرقة الأولى</option>
+                                <option value="2">الفرقة الثانية</option>
+                                <option value="3">الفرقة الثالثة</option>
+                                <option value="4">الفرقة الرابعة</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label>مكان الضبط (القاعة)</label>
+                            <input type="text" name="exam_hall" placeholder="مثال: مدرج أ - الدور الأرضي" required>
+                        </div>
+                    </div>
+
+                    <h4 class="form-section-title" style="margin-top: 30px; border-bottom-color: #ef4444;">
+                        <i class="fa-solid fa-gavel" style="color: #ef4444;"></i> تفاصيل المخالفة والأدلة
+                    </h4>
+
+                    <div class="form-row">
+                        <div class="col">
+                            <label>نوع المخالفة</label>
+                            <select name="violation_type" required
+                                style="height: 45px; border: 1px solid #cbd5e1; border-radius: 8px; width: 100%; padding: 0 10px;">
+                                <option value="" disabled selected>اختر نوع المخالفة...</option>
+                                <option value="cheating_material">حيازة أوراق / مذكرات (برشام)</option>
+                                <option value="mobile_phone">حيازة هاتف محمول / سماعة بلوتوث</option>
+                                <option value="talking">التحدث أثناء الامتحان / إحداث شغب</option>
+                                <option value="impersonation">انتحال شخصية (حضور طالب مكان آخر)</option>
+                                <option value="verbal_abuse">تطاول لفظي على المراقب</option>
+                                <option value="other">أخرى (تذكر في التفاصيل)</option>
+                            </select>
+                        </div>
+
+                        <div class="col">
+                            <label>صورة أداة الغش (اختياري - إن وجد)</label>
+
+                            <div style="position: relative;">
+                                <input type="file" name="evidence_file" id="evidence_file" accept="image/*"
+                                    onchange="previewEvidence(event)"
+                                    style="padding: 10px; border: 1px dashed #cbd5e1; border-radius: 8px; width: 100%; background: #f8fafc;">
+
+                                <div id="evidence_preview_container"
+                                    style="display: none; margin-top: 10px; text-align: center; border: 1px solid #ddd; padding: 5px; border-radius: 8px;">
+                                    <p style="font-size: 12px; margin-bottom: 5px; color: #64748b;">معاينة الدليل
+                                        المرفق:</p>
+                                    <img id="evidence_image_preview" src="" alt="الدليل"
+                                        style="max-width: 100%; max-height: 200px; border-radius: 4px;">
+                                    <button type="button" onclick="clearEvidence()" class="no-print"
+                                        style="margin-top: 10px; background-color: #fee2e2; color: #ef4444; border: 1px solid #ef4444; padding: 5px 15px; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: bold; transition: 0.3s;">
+                                        <i class="fa-solid fa-trash-can"></i> حذف الصورة
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col">
+                            <label>وصف تفصيلي للواقعة</label>
+                            <textarea name="description" rows="5" required
+                                placeholder="يرجى كتابة تفاصيل ما حدث بدقة..."
+                                style="width: 100%; padding: 15px; border: 1px solid #cbd5e1; border-radius: 8px; resize: vertical; font-family: 'Cairo', sans-serif;"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="modal-actions"
+                        style="margin-top: 30px; border-top: 1px solid #e2e8f0; padding-top: 20px; display: flex; gap: 15px;">
+
+                        <button type="submit" class="btn"
+                            style="background-color: #ef4444; color: white; width: 200px; font-size: 15px; border: none; border-radius: 6px; cursor: pointer; transition: 0.3s;">
+                            <i class="fa-solid fa-paper-plane"></i> إرسال التقرير فوراً
+                        </button>
+                        <button type="button" onclick="window.print()" class="btn"
+                            style="background-color: #3b82f6; color: white; width: 150px; font-size: 15px; border: none; border-radius: 6px; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                            <i class="fa-solid fa-print"></i> طباعة المحضر
+                        </button>
+                        <a href="invigilator_dashboard.html" class="btn"
+                            style="width: 150px; font-size: 15px; background-color: #fff; color: #64748b; border: 1px solid #cbd5e1; border-radius: 6px; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                            <i class="fa-solid fa-xmark"></i> إلغاء
+                        </a>
+
+                    </div>
+
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        // preview image before uploading
+        function previewEvidence(event) {
+            const input = event.target;
+            const previewContainer = document.getElementById('evidence_preview_container');
+            const previewImage = document.getElementById('evidence_image_preview');
+
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+
+                    previewImage.src = e.target.result;
+
+                    previewContainer.style.display = 'block';
+                };
+
+
+                reader.readAsDataURL(input.files[0]);
+            } else {
+
+                previewContainer.style.display = 'none';
+            }
+        }
+
+        // for set date and time with the same time opens the website
+        document.addEventListener('DOMContentLoaded', function () {
+            const now = new Date();
+
+            const dateString = now.toISOString().split('T')[0];
+            document.getElementById('incident_date').value = dateString;
+
+            const timeString = now.toTimeString().split(' ')[0].substring(0, 5);
+            document.getElementById('incident_time').value = timeString;
+        });
+
+        // to delete the selected evidence 
+        function clearEvidence() {
+            const input = document.getElementById('evidence_file');
+            const previewContainer = document.getElementById('evidence_preview_container');
+            const previewImage = document.getElementById('evidence_image_preview');
+
+            input.value = "";
+
+            previewContainer.style.display = 'none';
+            previewImage.src = "";
+        }
+    </script>
+
+</body>
+
+</html>
