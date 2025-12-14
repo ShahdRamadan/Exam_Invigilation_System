@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>المراقبون | جامعة الغردقة</title>
+    <title>الملاحظون | جامعة الغردقة</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -32,7 +32,7 @@
                     <i class="fa-solid fa-book-open"></i> <span>المواد الدراسية</span>
                 </a>
                 <a href="invigilators.html" class="active" data-section="observers">
-                    <i class="fa-solid fa-user-check"></i> <span>المراقبون</span>
+                    <i class="fa-solid fa-user-check"></i> <span>الملاحظون</span>
                 </a>
                 <a href="rooms.html" data-section="rooms">
                     <i class="fa-solid fa-door-closed"></i> <span>القاعات</span>
@@ -60,7 +60,7 @@
         </div>
 
         <section class="content">
-            <h2 class="section-title">قائمة المراقبين</h2>
+            <h2 class="section-title">قائمة الملاحظين</h2>
 
             <div class="controls">
                 <div class="filter-group">
@@ -69,7 +69,7 @@
 
                 <div style="display:flex; gap:10px;">
                     <a href="#addInvigilatorModal" class="btn add">
-                        <i class="fa-solid fa-plus"></i> إضافة مراقب
+                        <i class="fa-solid fa-plus"></i> إضافة ملاحظ
                     </a>
                 </div>
             </div>
@@ -117,7 +117,7 @@
                                 <a href="#editInvigilatorModal" class="small-btn edit" title="تعديل البيانات">
                                     <i class="fa-solid fa-pen"></i>
                                 </a>
-                                <a href="#deleteInvigilatorModal" class="small-btn del" title="حذف المراقب">
+                                <a href="#deleteInvigilatorModal" class="small-btn del" title="حذف الملاحظ">
                                     <i class="fa-solid fa-trash"></i>
                                 </a>
                             </td>
@@ -131,7 +131,7 @@
 
     <div id="addInvigilatorModal" class="modal-overlay">
         <div class="modal">
-            <h3>إضافة مراقب جديد</h3>
+            <h3>إضافة ملاحظ جديد</h3>
             <form action="/invigilators/save" method="POST" class="styled-form">
 
                 <h4 class="form-section-title"><i class="fa-solid fa-user-gear"></i> البيانات والحساب</h4>
@@ -195,7 +195,7 @@
         <div class="modal">
             <h3>
                 <i class="fa-solid fa-user-pen" style="color:var(--warning); margin-left:10px;"></i>
-                تعديل بيانات المراقب
+                تعديل بيانات الملاحظ
             </h3>
             <form action="/invigilators/update" method="POST" class="styled-form">
 
@@ -270,7 +270,7 @@
             <h3 style="justify-content: center; border: none; margin-bottom: 10px;">هل أنت متأكد؟</h3>
 
             <p style="color: var(--muted); margin-bottom: 25px;">
-                أنت على وشك حذف المراقب: <br>
+                أنت على وشك حذف الملاحظ: <br>
                 <span style="color: #000; font-weight: bold;">شهد رمضان</span>
                 <br>
                 <span style="font-size: 13px; color: var(--danger);">سيتم حذف جدول المراقبة الخاص به أيضاً.</span>
@@ -292,7 +292,7 @@
     <div id="viewDetailsModal" class="modal-overlay">
         <div class="modal" style="width: 600px;">
             <h3 style="border-bottom:none; margin-bottom:10px;">
-                المهام المسندة للمراقب:
+                المهام المسندة للملاحظ:
                 <span style="color:var(--accent)">شهد رمضان</span>
             </h3>
 
