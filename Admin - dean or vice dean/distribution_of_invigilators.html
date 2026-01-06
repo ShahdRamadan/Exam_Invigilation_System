@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>توزيع المراقبين | جامعة الغردقة</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="../Styles/index.css">
+</head>
+
+<body>
+
+    <aside class="sidebar">
+        <div>
+            <div class="brand">
+                <img src="../Images/UNI_LOGO.png" alt="شعار الجامعة" class="brand-logo">
+                <span>جامعة الغردقة</span>
+            </div>
+
+            <nav class="nav">
+                <a href="transfer.html" class="active">
+                    <i class="fa-solid fa-user-check"></i>
+                    <span>توزيع المراقبين</span>
+                </a>
+                <a href="add_schedule.html">
+                    <i class="fa-solid fa-calendar-plus"></i>
+                    <span>جدول الامتحانات</span>
+                </a>
+            </nav>
+        </div>
+
+        <div class="logout">
+            <a href="../login.html">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                تسجيل الخروج
+            </a>
+        </div>
+    </aside>
+
+    <main class="main">
+        <div class="topbar">
+            <h1>مرحباً، السيد الأستاذ الدكتور العميد / الوكيل</h1>
+            <div class="user">
+                <i class="fa-regular fa-user-circle"></i> Dean Office
+            </div>
+        </div>
+
+        <section class="content">
+            <h2 class="section-title">إدارة توزيع وتكليف المراقبين</h2>
+
+            <div class="controls">
+                <form action="" method="GET" class="filter-group" style="flex: 1;">
+                    <select name="doctor_id" style="width: 200px;">
+                        <option value="">كل أعضاء هيئة التدريس</option>
+                        <option value="1">أ.د/ أحمد محمد</option>
+                        <option value="2">د/ سارة محمود</option>
+                    </select>
+
+                    <select name="role" style="width: 150px;">
+                        <option value="">كل المهام</option>
+                        <option value="floor">مراقب دور</option>
+                        <option value="hall">مراقب مدرج</option>
+                    </select>
+
+                    <button type="submit" class="btn"
+                        style="background-color: var(--primary); color: white; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <span>بحث</span>
+                    </button>
+                </form>
+
+                <a href="#assignmentModal" class="btn add">
+                    <i class="fa-solid fa-plus"></i> إضافة تكليف جديد
+                </a>
+            </div>
+
+            <div class="card">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>عضو هيئة التدريس</th>
+                            <th>التاريخ</th>
+                            <th>المهمة الإشرافية</th>
+                            <th>المكان / النطاق</th>
+                            <th>إجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="font-weight: bold;">أ.د/ أحمد محمد</td>
+                            <td>2025-06-15</td>
+                            <td>مراقب عام دور</td>
+                            <td>مبنى (أ) - الدور الأول</td>
+                            <td>
+                                <a href="#assignmentModal" class="small-btn edit" title="تعديل">
+                                    <i class="fa-solid fa-pen"></i>
+                                </a>
+                                <a href="#deleteModal" class="small-btn del" title="حذف">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <div id="assignmentModal" class="modal-overlay">
+        <div class="modal">
+            <h3>
+                <i class="fa-solid fa-file-pen" style="color:var(--warning); margin-left:10px;"></i>
+                بيانات تكليف المراقب
+            </h3>
+
+            <form action="/assignments/save" method="POST">
+                <input type="hidden" name="assignment_id" value="">
+
+                <div class="form-row">
+                    <div class="col">
+                        <label>عضو هيئة التدريس</label>
+                        <select name="doctor_id" required>
+                            <option value="">اختر الدكتور...</option>
+                            <option value="1">أ.د/ أحمد محمد</option>
+                            <option value="2">د/ سارة محمود</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label>تاريخ التكليف</label>
+                        <div class="input-icon-wrapper">
+                            <input type="date" name="date" required placeholder="تاريخ التكليف">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <label>توقيت التكليف</label>
+                        <div class="input-icon-wrapper">
+                            <input type="time" name="time" required placeholder="توقيت التكليف">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col">
+                        <label>طبيعة المهمة</label>
+                        <select name="role" required>
+                            <option value="floor">مراقب دور</option>
+                            <option value="hall">مراقب مدرج</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label>المكان / اللجنة</label>
+                        <select name="location_id" required>
+                            <option value="">اختر المكان...</option>
+                            <option value="101">مدرج (أ)</option>
+                            <option value="102">قاعة 42/1</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <a href="#" class="btn-secondary">إلغاء</a>
+                    <button type="submit" class="btn add">حفظ التكليف</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="deleteModal" class="modal-overlay">
+        <div class="modal" style="width: 400px; text-align: center;">
+            <div style="margin-bottom: 20px;">
+                <i class="fa-solid fa-triangle-exclamation" style="font-size: 50px; color: var(--danger);"></i>
+            </div>
+            <h3 style="justify-content: center; border: none; margin-bottom: 10px;">تأكيد الحذف</h3>
+            <p style="color: var(--muted); margin-bottom: 25px;">هل أنت متأكد من حذف هذا التكليف الإداري؟</p>
+
+            <form action="/assignments/delete" method="POST">
+                <input type="hidden" name="id" value="">
+                <div class="modal-actions" style="justify-content: center;">
+                    <a href="#" class="btn-secondary">تراجع</a>
+                    <button type="submit" class="btn" style="background-color: var(--danger); color: white;">نعم،
+                        احذف</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>

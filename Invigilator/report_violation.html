@@ -12,6 +12,15 @@
 
 <body class="violation-page">
 
+    <div id="print-header">
+        <img src="../Images/UNI_LOGO.png" alt="شعار الجامعة" style="width: 80px; margin-bottom: 10px;">
+        <h2 style="margin: 0; font-size: 24px;">جامعة الغردقة</h2>
+        <h3 style="margin: 5px 0 0; font-size: 18px; font-weight: normal;">شئون التعليم والطلاب - مذكرة إثبات حالة غش /
+            مخالفة</h3>
+        <p style="margin-top: 10px;">
+            العام الجامعي <span id="academic_year_print">... / ...</span>
+        </p>
+    </div>
     <aside class="sidebar">
         <div>
             <div class="brand">
@@ -72,8 +81,7 @@
             <div class="no-print"
                 style="background-color: #fef2f2; border: 1px solid #ef4444; color: #991b1b; padding: 15px; border-radius: 8px; margin-bottom: 25px; font-size: 14px; line-height: 1.6;">
                 <i class="fa-solid fa-circle-info"></i> <strong>تنبيه هام:</strong>
-                هذا التقرير يعتبر وثيقة رسمية وقانونية. يرجى التأكد من دقة البيانات المدخلة قبل الإرسال. سيتم تحويل
-                الطالب تلقائياً إلى مجلس التأديب بناءً على هذا التقرير.
+                يرجى التأكد من دقة البيانات المدخلة قبل الإرسال.
             </div>
 
             <form action="/invigilator/submit-violation" method="POST" enctype="multipart/form-data">
@@ -89,13 +97,17 @@
                     <div class="form-row">
                         <div class="col">
                             <label>تاريخ الواقعة</label>
-                            <input type="date" name="incident_date" id="incident_date"
-                                style="background-color: #f1f5f9;">
+                            <div class="input-icon-wrapper">
+                                <input type="date" name="incident_date" id="incident_date">
+                                <i class="fa-solid fa-calendar-day"></i>
+                            </div>
                         </div>
                         <div class="col">
                             <label>وقت الضبط</label>
-                            <input type="time" name="incident_time" id="incident_time"
-                                style="background-color: #f1f5f9; ">
+                            <div class="input-icon-wrapper">
+                                <input type="time" name="incident_time" id="incident_time">
+                                <i class="fa-solid fa-clock"></i>
+                            </div>
                         </div>
                         <div class="col">
                             <label>اسم المادة / المقرر</label>
@@ -192,12 +204,8 @@
                     <div class="modal-actions"
                         style="margin-top: 30px; border-top: 1px solid #e2e8f0; padding-top: 20px; display: flex; gap: 15px;">
 
-                        <button type="submit" class="btn"
-                            style="background-color: #ef4444; color: white; width: 200px; font-size: 15px; border: none; border-radius: 6px; cursor: pointer; transition: 0.3s;">
-                            <i class="fa-solid fa-paper-plane"></i> إرسال التقرير فوراً
-                        </button>
-                        <button type="button" onclick="window.print()" class="btn"
-                            style="background-color: #3b82f6; color: white; width: 150px; font-size: 15px; border: none; border-radius: 6px; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                        <button type="button" onclick="window.print()" class="btn add"
+                            style="width: 150px; font-size: 15px; display: flex; align-items: center; justify-content: center; gap: 8px;">
                             <i class="fa-solid fa-print"></i> طباعة المحضر
                         </button>
                         <a href="invigilator_dashboard.html" class="btn"
@@ -259,6 +267,33 @@
             previewContainer.style.display = 'none';
             previewImage.src = "";
         }
+
+        // دالة حساب العام الجامعي والفصل الدراسي
+        function updateAcademicDates() {
+            const date = new Date();
+            const currentMonth = date.getMonth() + 1;
+            const currentYear = date.getFullYear();
+
+            // 1. حساب العام الجامعي
+            let academicYearString = "";
+            if (currentMonth >= 9) {
+                academicYearString = `${currentYear} / ${currentYear + 1}`;
+            } else {
+                academicYearString = `${currentYear - 1} / ${currentYear}`;
+            }
+
+            const yearElement = document.getElementById("academic_year_print");
+            if (yearElement) {
+                yearElement.textContent = academicYearString;
+            }
+        }
+
+        // استدعاء الدالة عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', function () {
+            // ... (أكوادك السابقة الخاصة بالتاريخ والوقت) ...
+
+            updateAcademicDates(); // تشغيل الدالة
+        });
     </script>
 
 </body>

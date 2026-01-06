@@ -8,7 +8,6 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-
     <link rel="stylesheet" href="../Styles/index.css">
 </head>
 
@@ -22,42 +21,18 @@
             </div>
 
             <nav class="nav">
-                <a href="#" data-section="dashboard">
-                    <i class="fa-solid fa-palette"></i>
-                    <span>لوحة التحكم</span>
-                </a>
-                <a href="students.html" class="active" data-section="students">
-                    <i class="fa-solid fa-users"></i>
-                    <span>الطلاب</span>
-                </a>
-                <a href="subjects.html" data-section="subjects">
-                    <i class="fa-solid fa-book-open"></i>
-                    <span>المواد الدراسية</span>
-                </a>
-                <a href="invigilators.html" data-section="observers">
-                    <i class="fa-solid fa-user-check"></i>
-                    <span>المراقبون</span>
-                </a>
-                <a href="rooms.html" data-section="rooms">
-                    <i class="fa-solid fa-door-closed"></i>
-                    <span>القاعات</span>
-                </a>
-                <a href="add_schedule.html" data-section="add-schedule">
-                    <i class="fa-solid fa-calendar-plus"></i>
-                    <span>إضافة جدول</span>
-                </a>
-                <a href="#" data-section="conflicts">
-                    <i class="fa-solid fa-triangle-exclamation"></i>
-                    <span>التعارضات</span>
-                </a>
+                <a href="#" data-section="dashboard"><i class="fa-solid fa-palette"></i> <span>لوحة التحكم</span></a>
+                <a href="students.html" class="active"><i class="fa-solid fa-users"></i> <span>الطلاب</span></a>
+                <a href="admin_requests.html"><i class="fa-solid fa-clipboard-check"></i> <span>طلبات التسجيل</span></a>
+                <a href="subjects.html"><i class="fa-solid fa-book-open"></i> <span>المواد الدراسية</span></a>
+                <a href="invigilators.html"><i class="fa-solid fa-user-check"></i> <span>الملاحظون</span></a>
+                <a href="rooms.html"><i class="fa-solid fa-door-closed"></i> <span>القاعات</span></a>
+                <a href="add_schedule.html"><i class="fa-solid fa-calendar-plus"></i> <span>إضافة جدول</span></a>
             </nav>
         </div>
 
         <div class="logout">
-            <a href="#">
-                <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                تسجيل الخروج
-            </a>
+            <a href="#"><i class="fa-solid fa-arrow-right-from-bracket"></i> تسجيل الخروج</a>
         </div>
     </aside>
 
@@ -87,7 +62,7 @@
                 </div>
 
                 <a href="#addStudentModal" class="btn add">
-                    <i class="fa-solid fa-plus"></i> إضافة طالب
+                    <i class="fa-solid fa-plus"></i> إضافة طالب جديد
                 </a>
             </div>
 
@@ -98,10 +73,9 @@
                             <th>#</th>
                             <th>الاسم</th>
                             <th>الرقم الجامعي</th>
-                            <th>البريد الإلكتروني</th>
                             <th>الفرقة</th>
                             <th>القسم</th>
-                            <th>عدد المواد</th>
+                            <th>حالة المواد</th>
                             <th>الإجراءات</th>
                         </tr>
                     </thead>
@@ -109,30 +83,164 @@
                         <tr>
                             <td>1</td>
                             <td>شهد رمضان</td>
-                            <td>1234567</td>
-                            <td>shahd@hurghada.edu.eg</td>
+                            <td>2024001</td>
                             <td>الرابعة</td>
                             <td>علوم الحاسب</td>
                             <td>
-                                <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
-                                    <span
-                                        style="background: #e0f2fe; color: #0369a1; padding: 4px 10px; border-radius: 15px; font-size: 12px; font-weight: bold; border: 1px solid #bae6fd;">
-                                        6 مواد
-                                    </span>
-                                    <a href="#viewSubjectsModal" class="small-btn show" title="عرض المواد"
-                                        style="padding: 5px 8px;">
-                                        <i class="fa-regular fa-eye"></i>
+                                <span
+                                    style="background: #f0fdf4; color: #166534; padding: 4px 10px; border-radius: 15px; font-size: 12px; font-weight: bold; border: 1px solid #bbf7d0; display: inline-flex; align-items: center; gap: 5px;">
+                                    <i class="fa-solid fa-check"></i> 6 مواد معتمدة
+                                </span>
+                                <a href="#viewSubjectsModal" class="small-btn show" title="عرض المواد">
+                                    <i class="fa-regular fa-eye"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <div style="display: flex; gap: 5px; justify-content: center;">
+                                    <a href="#editStudentModal" class="small-btn edit" title="تعديل">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </a>
+                                    <a href="#deleteStudentModal" class="small-btn del" title="حذف">
+                                        <i class="fa-solid fa-trash"></i>
                                     </a>
                                 </div>
                             </td>
-                            <td>
-                                <a href="#editStudentModal" class="small-btn edit" title="تعديل البيانات">
-                                    <i class="fa-solid fa-pen"></i>
-                                </a>
+                        </tr>
 
-                                <a href="#deleteStudentModal" class="small-btn del" title="حذف الطالب">
-                                    <i class="fa-solid fa-trash"></i>
+                        <tr>
+                            <td>2</td>
+                            <td>أحمد محمود</td>
+                            <td>2024150</td>
+                            <td>الأولى</td>
+                            <td>عام</td>
+                            <td>
+                                <span
+                                    style="background: #fffbeb; color: #92400e; padding: 4px 10px; border-radius: 15px; font-size: 12px; font-weight: bold; border: 1px solid #fde68a; display: inline-flex; align-items: center; gap: 5px;">
+                                    <i class="fa-solid fa-circle-exclamation"></i> لم يسجل بعد
+                                </span>
+                                <a href="#" class="small-btn"
+                                    style="background-color: #cbd5e1; cursor: not-allowed; pointer-events: none;">
+                                    <i class="fa-regular fa-eye-slash"></i>
                                 </a>
+                            </td>
+                            <td>
+                                <div style="display: flex; gap: 5px; justify-content: center;">
+                                    <a href="#editStudentModal" class="small-btn edit" title="تعديل">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </a>
+                                    <a href="#deleteStudentModal" class="small-btn del" title="حذف">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>3</td>
+                            <td>محمد علي</td>
+                            <td>2024055</td>
+                            <td>الثانية</td>
+                            <td>نظم المعلومات</td>
+                            <td>
+                                <span
+                                    style="background: #f0fdf4; color: #166534; padding: 4px 10px; border-radius: 15px; font-size: 12px; font-weight: bold; border: 1px solid #bbf7d0; display: inline-flex; align-items: center; gap: 5px;">
+                                    <i class="fa-solid fa-check"></i> 4 مواد معتمدة
+                                </span>
+                                <a href="#viewSubjectsModal" class="small-btn show" title="عرض المواد">
+                                    <i class="fa-regular fa-eye"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <div style="display: flex; gap: 5px; justify-content: center;">
+                                    <a href="#editStudentModal" class="small-btn edit" title="تعديل">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </a>
+                                    <a href="#deleteStudentModal" class="small-btn del" title="حذف">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>4</td>
+                            <td>سارة حسن</td>
+                            <td>2024088</td>
+                            <td>الثالثة</td>
+                            <td>الذكاء الاصطناعي</td>
+                            <td>
+                                <span
+                                    style="background: #f0fdf4; color: #166534; padding: 4px 10px; border-radius: 15px; font-size: 12px; font-weight: bold; border: 1px solid #bbf7d0; display: inline-flex; align-items: center; gap: 5px;">
+                                    <i class="fa-solid fa-check"></i> 5 مواد معتمدة
+                                </span>
+                                <a href="#viewSubjectsModal" class="small-btn show" title="عرض المواد">
+                                    <i class="fa-regular fa-eye"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <div style="display: flex; gap: 5px; justify-content: center;">
+                                    <a href="#editStudentModal" class="small-btn edit" title="تعديل">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </a>
+                                    <a href="#deleteStudentModal" class="small-btn del" title="حذف">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>5</td>
+                            <td>عمر خالد</td>
+                            <td>2024199</td>
+                            <td>الأولى</td>
+                            <td>عام</td>
+                            <td>
+                                <span
+                                    style="background: #fffbeb; color: #92400e; padding: 4px 10px; border-radius: 15px; font-size: 12px; font-weight: bold; border: 1px solid #fde68a; display: inline-flex; align-items: center; gap: 5px;">
+                                    <i class="fa-solid fa-circle-exclamation"></i> لم يسجل بعد
+                                </span>
+                                <a href="#" class="small-btn"
+                                    style="background-color: #cbd5e1; cursor: not-allowed; pointer-events: none;">
+                                    <i class="fa-regular fa-eye-slash"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <div style="display: flex; gap: 5px; justify-content: center;">
+                                    <a href="#editStudentModal" class="small-btn edit" title="تعديل">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </a>
+                                    <a href="#deleteStudentModal" class="small-btn del" title="حذف">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>6</td>
+                            <td>منى السيد</td>
+                            <td>2024012</td>
+                            <td>الثانية</td>
+                            <td>عام</td>
+                            <td>
+                                <span
+                                    style="background: #f0fdf4; color: #166534; padding: 4px 10px; border-radius: 15px; font-size: 12px; font-weight: bold; border: 1px solid #bbf7d0; display: inline-flex; align-items: center; gap: 5px;">
+                                    <i class="fa-solid fa-check"></i> 3 مواد معتمدة
+                                </span>
+                                <a href="#viewSubjectsModal" class="small-btn show" title="عرض المواد">
+                                    <i class="fa-regular fa-eye"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <div style="display: flex; gap: 5px; justify-content: center;">
+                                    <a href="#editStudentModal" class="small-btn edit" title="تعديل">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </a>
+                                    <a href="#deleteStudentModal" class="small-btn del" title="حذف">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
+                                </div>
                             </td>
                         </tr>
                     </tbody>
@@ -143,48 +251,61 @@
 
     <div id="addStudentModal" class="modal-overlay">
         <div class="modal">
-            <h3>إضافة طالب جديد</h3>
+            <h3><i class="fa-solid fa-user-plus" style="color: var(--accent); margin-left: 10px;"></i> إضافة طالب جديد
+            </h3>
 
             <form id="studentForm" action="/students/save" method="POST">
 
-                <h4
-                    style="font-size:14px; color:#1e3a8a; border-bottom:1px solid #eee; padding-bottom:5px; margin-bottom:10px;">
-                    1. البيانات الأساسية
-                </h4>
-
                 <div class="form-row">
                     <div class="col">
-                        <label for="f_name">الاسم الرباعي</label>
-                        <input type="text" id="f_name" name="full_name" required placeholder="أدخل الاسم كاملاً">
+                        <label>الاسم الرباعي <span class="required">*</span></label>
+                        <div class="input-icon-wrapper">
+                            <i class="fa-solid fa-user"></i>
+                            <input type="text" name="full_name" required placeholder="أدخل الاسم كاملاً">
+                        </div>
                     </div>
                     <div class="col">
-                        <label for="f_studentId">الرقم الجامعي</label>
-                        <input type="number" id="f_studentId" name="student_code" required placeholder="مثال: 2024001">
+                        <label>الرقم الجامعي (ID) <span class="required">*</span></label>
+                        <div class="input-icon-wrapper">
+                            <i class="fa-solid fa-id-card"></i>
+                            <input type="number" name="student_code" required placeholder="مثال: 2024001">
+                        </div>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="col">
-                        <label for="f_email">البريد الإلكتروني</label>
-                        <input type="email" id="f_email" name="email" placeholder="student@hurghada.edu.eg">
+                        <label>البريد الإلكتروني</label>
+                        <div class="input-icon-wrapper">
+                            <i class="fa-solid fa-envelope"></i>
+                            <input type="email" name="email" placeholder="student@hurghada.edu.eg">
+                        </div>
                     </div>
-
                     <div class="col">
-                        <label for="f_current_level">الفرقة المقيد بها الطالب</label>
-                        <select id="f_current_level" name="current_level" required
-                            style="background-color: #f0f9ff; border-color: #bae6fd;">
+                        <label>كلمة المرور <span class="required">*</span></label>
+                        <div class="input-icon-wrapper">
+                            <input type="password" name="password" id="add_password" required placeholder="******">
+                            <i class="fa-solid fa-eye toggle-pass-btn"
+                                onclick="togglePassword('add_password', this)"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col">
+                        <label>الفرقة الدراسية</label>
+                        <select name="current_level" required>
+                            <option value="">اختر الفرقة...</option>
                             <option value="1">الفرقة الأولى</option>
                             <option value="2">الفرقة الثانية</option>
                             <option value="3">الفرقة الثالثة</option>
                             <option value="4">الفرقة الرابعة</option>
                         </select>
                     </div>
-                </div>
-
-                <div class="form-row">
                     <div class="col">
-                        <label for="f_main_dept">القسم الرئيسي للطالب</label>
-                        <select id="f_main_dept" name="department_id" required>
+                        <label>القسم الأكاديمي</label>
+                        <select name="department_id" required>
+                            <option value="">اختر القسم...</option>
                             <option value="1">عام</option>
                             <option value="2">علوم الحاسب</option>
                             <option value="3">نظم المعلومات</option>
@@ -194,66 +315,9 @@
                     </div>
                 </div>
 
-
-                <h4
-                    style="font-size:14px; color:#1e3a8a; border-bottom:1px solid #eee; padding-bottom:5px; margin-top:20px; margin-bottom:10px;">
-                    2. تسجيل المواد الدراسية
-                </h4>
-
-                <div class="filter-card" style="background:#fffbeb; border-color:#fde68a;">
-                    <div class="filter-item">
-                        <label for="search_dept" style="color:#b45309">بحث في مواد قسم:</label>
-                        <div class="select-wrapper">
-                            <select id="search_dept">
-                                <option value="1">عام</option>
-                                <option value="2">علوم الحاسب</option>
-                                <option value="3">نظم المعلومات</option>
-                                <option value="4">الذكاء الاصطناعي</option>
-                                <option value="5">تكنولوجيا المعلومات</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="filter-item">
-                        <label for="search_year" style="color:#b45309">بحث في مواد الفرقة:</label>
-                        <div class="select-wrapper">
-                            <select id="search_year">
-                                <option value="">اختر الفرقة لعرض موادها</option>
-                                <option value="1">مواد الفرقة الأولى</option>
-                                <option value="2">مواد الفرقة الثانية</option>
-                                <option value="3">مواد الفرقة الثالثة</option>
-                                <option value="4">مواد الفرقة الرابعة</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="col">
-                        <label>قائمة المواد المتاحة (حدد للاختيار)</label>
-                        <div id="f_subjects_checklist" class="subjects-checklist">
-                            <p class="muted" style="padding: 10px; text-align: center;">
-                                اختر الفرقة من الفلتر بالأعلى لإظهار المواد...
-                                <br>
-                                <small>(يمكنك اختيار مواد من فرق مختلفة)</small>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="selected-subjects-area">
-                    <label style="color:#15803d; font-weight:bold;">
-                        <i class="fa-solid fa-check-circle"></i> المواد التي سيتم تسجيلها:
-                    </label>
-
-                    <div class="selected-list">
-                        <p class="no-selection">لم يتم اختيار مواد بعد...</p>
-                    </div>
-                </div>
-
                 <div class="modal-actions">
-                    <a href="#" class="btn-secondary" id="closeModalBtn">إلغاء</a>
-
-                    <button type="submit" class="btn add">حفظ البيانات</button>
+                    <a href="#" class="btn-secondary">إلغاء</a>
+                    <button type="submit" class="btn add">إنشاء حساب الطالب</button>
                 </div>
 
             </form>
@@ -261,9 +325,9 @@
     </div>
 
     <div id="viewSubjectsModal" class="modal-overlay">
-        <div class="modal" style="width: 700px;">
+        <div class="modal" style="width: 600px;">
             <h3 style="border-bottom:none; margin-bottom:10px;">
-                المواد المسجلة للطالب:
+                المواد المسجلة والمعتمدة:
                 <span style="color:var(--accent)"> شهد رمضان</span>
             </h3>
 
@@ -273,31 +337,23 @@
                         <tr>
                             <th style="padding:10px; font-size:13px;">كود المادة</th>
                             <th style="padding:10px; font-size:13px;">اسم المقرر</th>
-                            <th style="padding:10px; font-size:13px;">الفرقة الأصلية</th>
                             <th style="padding:10px; font-size:13px;">الساعات</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <td>CS101</td>
-                        <td>مقدمة في الحاسب</td>
-                        <td>
-                            <span
-                                style="background:#e2e8f0; color:#475569; padding:2px 8px; border-radius:4px; font-size:12px; font-weight:bold;">
-                                الفرقة الأولى
-                            </span>
-                        </td>
-                        <td>3</td>
-                        </tr>
-
                         <tr>
-                            <td>CS201</td>
-                            <td>هياكل بيانات</td>
-                            <td>
-                                <span
-                                    style="background:#e0f2fe; color:#0369a1; padding:2px 8px; border-radius:4px; font-size:12px; font-weight:bold;">
-                                    الفرقة الثانية
-                                </span>
-                            </td>
+                            <td>CS401</td>
+                            <td>نظم موزعة</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>CS405</td>
+                            <td>أمن سيبراني</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>GP1</td>
+                            <td>مشروع تخرج 1</td>
                             <td>3</td>
                         </tr>
                     </tbody>
@@ -306,7 +362,7 @@
 
             <div class="modal-actions">
                 <a href="#" class="btn-close-modal">
-                    <i class="fa-solid fa-xmark"></i> إغلاق النافذة
+                    <i class="fa-solid fa-xmark"></i> إغلاق
                 </a>
             </div>
         </div>
@@ -314,16 +370,10 @@
 
     <div id="editStudentModal" class="modal-overlay">
         <div class="modal">
-            <h3>
-                <i class="fa-solid fa-user-pen" style="color:var(--warning); margin-left:10px;"></i>
-                تعديل بيانات الطالب
+            <h3><i class="fa-solid fa-user-pen" style="color:var(--warning); margin-left:10px;"></i> تعديل بيانات الطالب
             </h3>
-
             <form action="/students/update" method="POST">
-
                 <input type="hidden" name="student_id" value="1">
-
-                <h4 class="form-section-title">1. البيانات الأساسية</h4>
 
                 <div class="form-row">
                     <div class="col">
@@ -332,7 +382,7 @@
                     </div>
                     <div class="col">
                         <label>الرقم الجامعي</label>
-                        <input type="number" name="student_code" value="1234567" required>
+                        <input type="number" name="student_code" value="2024001" required>
                     </div>
                 </div>
 
@@ -343,64 +393,53 @@
                     </div>
                     <div class="col">
                         <label>الفرقة</label>
-                        <select name="current_level" style="background-color: #f0f9ff;">
-                            <option value="1">الفرقة الأولى</option>
-                            <option value="2">الفرقة الثانية</option>
-                            <option value="3">الفرقة الثالثة</option>
+                        <select name="current_level">
                             <option value="4" selected>الفرقة الرابعة</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="col">
-                        <label>القسم</label>
-                        <select name="department_id">
-                            <option value="2" selected>علوم الحاسب</option>
+                            <option value="3">الفرقة الثالثة</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="modal-actions">
                     <a href="#" class="btn-secondary">إلغاء</a>
-                    <button type="submit" class="btn add" style="background-color: var(--warning); color: #000;">
-                        حفظ التعديلات
-                    </button>
+                    <button type="submit" class="btn add" style="background-color: var(--warning); color: #000;">حفظ
+                        التعديلات</button>
                 </div>
             </form>
         </div>
     </div>
-
-
 
     <div id="deleteStudentModal" class="modal-overlay">
         <div class="modal" style="width: 400px; text-align: center;">
-
-            <div style="margin-bottom: 20px;">
-                <i class="fa-solid fa-triangle-exclamation" style="font-size: 50px; color: var(--danger);"></i>
-            </div>
-
+            <div style="margin-bottom: 20px;"><i class="fa-solid fa-triangle-exclamation"
+                    style="font-size: 50px; color: var(--danger);"></i></div>
             <h3 style="justify-content: center; border: none; margin-bottom: 10px;">هل أنت متأكد؟</h3>
-
-            <p style="color: var(--muted); margin-bottom: 25px;">
-                أنت على وشك حذف الطالب: <br>
-                <span style="color: #000; font-weight: bold;">شهد رمضان</span>
-                <br>
-                <span style="font-size: 13px; color: var(--danger);">لا يمكن التراجع عن هذا الإجراء.</span>
-            </p>
-
+            <p style="color: var(--muted); margin-bottom: 25px;">أنت على وشك حذف الطالب: <span
+                    style="color: #000; font-weight: bold;">شهد رمضان</span></p>
             <form action="/students/delete" method="POST">
-                <input type="hidden" name="student_id" value="1">
-
                 <div class="modal-actions" style="justify-content: center;">
                     <a href="#" class="btn-secondary">تراجع</a>
-                    <button type="submit" class="btn" style="background-color: var(--danger); color: white;">
-                        نعم، احذف
-                    </button>
+                    <button type="submit" class="btn" style="background-color: var(--danger); color: white;">نعم،
+                        احذف</button>
                 </div>
             </form>
         </div>
     </div>
+
+    <script>
+        function togglePassword(inputId, iconElement) {
+            const input = document.getElementById(inputId);
+            if (input.type === "password") {
+                input.type = "text";
+                iconElement.classList.remove("fa-eye");
+                iconElement.classList.add("fa-eye-slash");
+            } else {
+                input.type = "password";
+                iconElement.classList.remove("fa-eye-slash");
+                iconElement.classList.add("fa-eye");
+            }
+        }
+    </script>
 
 </body>
 

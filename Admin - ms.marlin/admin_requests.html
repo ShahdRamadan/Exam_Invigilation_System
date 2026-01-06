@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>طلبات التسجيل | جامعة الغردقة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../Styles/index.css">
+    <style>
+        /* تنسيق بسيط لرسالة لا توجد بيانات */
+        .no-data {
+            text-align: center;
+            padding: 40px;
+            color: var(--muted);
+            font-size: 16px;
+        }
+
+        /* انميشن بسيط للحذف */
+        .fade-out {
+            opacity: 0;
+            transform: translateX(20px);
+            transition: all 0.5s ease;
+        }
+    </style>
+</head>
+
+<body>
+
+    <aside class="sidebar">
+        <div>
+            <div class="brand">
+                <img src="../Images/UNI_LOGO.png" alt="شعار الجامعة" class="brand-logo">
+                <span>جامعة الغردقة</span>
+            </div>
+            <nav class="nav">
+                <a href="#" data-section="dashboard"><i class="fa-solid fa-palette"></i> <span>لوحة التحكم</span></a>
+                <a href="students.html"><i class="fa-solid fa-users"></i> <span>الطلاب</span></a>
+                <a href="admin_requests.html" class="active"><i class="fa-solid fa-clipboard-check"></i> <span>طلبات
+                        التسجيل</span></a>
+                <a href="subjects.html"><i class="fa-solid fa-book-open"></i> <span>المواد الدراسية</span></a>
+                <a href="invigilators.html"><i class="fa-solid fa-user-check"></i> <span>الملاحظون</span></a>
+                <a href="rooms.html"><i class="fa-solid fa-door-closed"></i> <span>القاعات</span></a>
+                <a href="add_schedule.html"><i class="fa-solid fa-calendar-plus"></i> <span>إضافة جدول</span></a>
+            </nav>
+        </div>
+        <div class="logout">
+            <a href="#"><i class="fa-solid fa-arrow-right-from-bracket"></i> تسجيل الخروج</a>
+        </div>
+    </aside>
+
+    <main class="main">
+        <div class="topbar">
+            <h1>أهلاً، مسؤول النظام</h1>
+            <div class="user"><i class="fa-regular fa-user-circle"></i> Admin</div>
+        </div>
+
+        <section class="content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2 class="section-title" style="margin: 0;">طلبات تسجيل المواد (<span id="requestsCount">0</span>)</h2>
+
+
+            </div>
+
+            <div class="card">
+                <table id="requestsTable">
+                    <thead>
+                        <tr>
+                            <th>الطالب</th>
+                            <th>الفرقة</th>
+                            <th>المواد المطلوبة</th>
+                            <th>إجمالي الساعات</th>
+                            <th>الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                    </tbody>
+                </table>
+
+                <div id="noDataMessage" class="no-data" style="display: none;">
+                    <i class="fa-regular fa-folder-open"
+                        style="font-size: 40px; margin-bottom: 15px; color: #cbd5e1;"></i>
+                    <p>لا توجد طلبات تسجيل معلقة حالياً</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // 1. بيانات وهمية (Mock Data) عشان الجدول ميكونش فاضي أول ما تفتح
+        const defaultRequests = [
+            {
+                id: 101,
+                name: "شهد رمضان",
+                studentId: "2024001",
+                level: "الرابعة",
+                subjects: ["نظم تشغيل", "أمن سيبراني", "مشروع تخرج 1"],
+                hours: 9
+            },
+            {
+                id: 102,
+                name: "محمد احمد",
+                studentId: "2024055",
+                level: "الثانية",
+                subjects: ["هياكل بيانات"],
+                hours: 3
+            },
+            {
+                id: 103,
+                name: "احمد محمد",
+                studentId: "2024102",
+                level: "الأولى",
+                subjects: ["مقدمة في الحاسب", "رياضيات 1", "فيزياء"],
+                hours: 8
+            },
+            {
+                id: 104,
+                name: "سارة علي",
+                studentId: "2024088",
+                level: "الثالثة",
+                subjects: ["ذكاء اصطناعي", "شبكات حاسب"],
+                hours: 6
+            },
+            {
+                id: 105,
+                name: "يوسف إبراهيم",
+                studentId: "2024012",
+                level: "الرابعة",
+                subjects: ["تعلم الالة", "تنقيب بيانات"],
+                hours: 6
+            },
+            {
+                id: 106,
+                name: "منى السيد",
+                studentId: "2024099",
+                level: "الثانية",
+                subjects: ["برمجة شيئية (OOP)", "تصميم منطقي"],
+                hours: 6
+            },
+            {
+                id: 107,
+                name: "كريم محمود",
+                studentId: "2024150",
+                level: "الأولى",
+                subjects: ["لغة إنجليزية", "حقوق إنسان"],
+                hours: 4
+            }
+        ];
+
+        // 2. دالة تحميل البيانات وعرضها
+        function loadRequests() {
+            const tableBody = document.getElementById('tableBody');
+            const noDataMsg = document.getElementById('noDataMessage');
+            const countSpan = document.getElementById('requestsCount');
+
+            // تنظيف الجدول قبل الملء
+            tableBody.innerHTML = '';
+
+            // محاولة جلب بيانات من LocalStorage (لو الطالب سجل من الصفحة اللي فاتت)
+            // لو مفيش، بنستخدم البيانات الوهمية defaultRequests
+            let requests = JSON.parse(localStorage.getItem('adminRequests')) || defaultRequests;
+
+            // تحديث العداد
+            countSpan.textContent = requests.length;
+
+            if (requests.length === 0) {
+                document.getElementById('requestsTable').style.display = 'none';
+                noDataMsg.style.display = 'block';
+                return;
+            }
+
+            // إظهار الجدول وإخفاء رسالة الفراغ
+            document.getElementById('requestsTable').style.display = 'table';
+            noDataMsg.style.display = 'none';
+
+            // رسم الصفوف
+            requests.forEach(req => {
+                const row = document.createElement('tr');
+                row.id = `row-${req.id}`;
+
+                // تحويل مصفوفة المواد لـ HTML Badges
+                const subjectsHTML = req.subjects.map(sub =>
+                    `<span style="background: #f1f5f9; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin-left:5px;">${sub}</span>`
+                ).join('');
+
+                row.innerHTML = `
+                    <td>
+                        <strong>${req.name}</strong><br>
+                        <span style="font-size: 12px; color: var(--muted);">ID: ${req.studentId}</span>
+                    </td>
+                    <td>${req.level}</td>
+                    <td>
+                        <div style="display: flex; flex-wrap: wrap; gap: 5px;">
+                            ${subjectsHTML}
+                        </div>
+                    </td>
+                    <td><span style="font-weight: bold; color: var(--primary);">${req.hours} ساعات</span></td>
+                    <td>
+                        <div style="display: flex; gap: 5px; justify-content: center;">
+                            <button onclick="handleAction(${req.id}, 'approve')" class="small-btn show" style="background-color: #16a34a;" title="موافقة">
+                                <i class="fa-solid fa-check"></i>
+                            </button>
+                            <button onclick="handleAction(${req.id}, 'reject')" class="small-btn del" title="رفض">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // 3. دالة التعامل مع الأزرار (قبول / رفض)
+        function handleAction(id, action) {
+            const row = document.getElementById(`row-${id}`);
+
+            // رسالة تأكيد (يمكن استبدالها بـ Modal)
+            const confirmMsg = action === 'approve' ? 'هل أنت متأكد من اعتماد هذا الطالب؟' : 'هل أنت متأكد من رفض الطلب؟';
+
+            if (confirm(confirmMsg)) {
+                // إضافة كلاس للانيميشن
+                row.classList.add('fade-out');
+
+                // الانتظار حتى ينتهي الانيميشن ثم الحذف من الـ Array ومن الشاشة
+                setTimeout(() => {
+                    // هنا المفروض نبعت للباك إند، لكننا هنحذف من الذاكرة المؤقتة
+                    let requests = JSON.parse(localStorage.getItem('adminRequests')) || defaultRequests;
+                    requests = requests.filter(r => r.id !== id);
+
+                    // تحديث LocalStorage (اختياري عشان المحاكاة تكمل)
+                    if (localStorage.getItem('adminRequests')) {
+                        localStorage.setItem('adminRequests', JSON.stringify(requests));
+                    } else {
+                        // لو بنستخدم البيانات الوهمية، هنعدل المصفوفة دي بس عشان العرض
+                        const index = defaultRequests.findIndex(r => r.id === id);
+                        if (index > -1) defaultRequests.splice(index, 1);
+                    }
+
+                    // إعادة تحميل الجدول
+                    loadRequests();
+
+                    // رسالة نجاح بسيطة
+                    alert(action === 'approve' ? 'تم اعتماد الطالب بنجاح ✅' : 'تم رفض الطلب ❌');
+
+                }, 500);
+            }
+        }
+
+        // تحميل البيانات عند فتح الصفحة
+        document.addEventListener('DOMContentLoaded', loadRequests);
+    </script>
+</body>
+
+</html>

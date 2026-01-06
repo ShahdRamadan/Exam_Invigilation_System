@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل المواد | جامعة الغردقة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../Styles/index.css">
+</head>
+
+<body>
+
+    <aside class="sidebar">
+        <div>
+            <div class="brand">
+                <img src="../Images/UNI_LOGO.png" alt="شعار الجامعة" class="brand-logo">
+                <span>جامعة الغردقة</span>
+            </div>
+            <nav class="nav">
+                <a href="student_registration.html" class="active">
+                    <i class="fa-solid fa-book-medical"></i> <span>تسجيل المواد</span>
+                </a>
+                <a href="student_exam_table.html">
+                    <i class="fa-solid fa-calendar-days"></i> <span>جدول الامتحانات</span>
+                </a>
+                <a href="student_profile.html">
+                    <i class="fa-solid fa-user-gear"></i> <span>الملف الشخصي</span>
+                </a>
+            </nav>
+        </div>
+        <div class="logout">
+            <a href="../login.html"><i class="fa-solid fa-arrow-right-from-bracket"></i> تسجيل الخروج</a>
+        </div>
+    </aside>
+
+    <main class="main">
+        <div class="topbar">
+            <h1>تسجيل المقررات الدراسية</h1>
+            <div class="user"><i class="fa-solid fa-graduation-cap"></i> Student</div>
+        </div>
+
+        <section class="content">
+
+            <div class="filter-card" style="background: #f0f9ff; border-right-color: var(--primary);">
+                <div style="display: flex; gap: 15px; align-items: center;">
+                    <i class="fa-solid fa-circle-info" style="font-size: 24px; color: var(--primary);"></i>
+                    <div>
+                        <p style="margin: 0; font-size: 14px; color: #334155;">
+                            يمكنك اختيار المواد من أي فرقة دراسية (مواد التخلفات أو مواد فرقتك الحالية).
+                            <br>
+                            <strong>تنبيه:</strong> سيقوم المسؤول بمراجعة اختيارك واعتماده أو رفضه.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <form action="/student/submit-registration" method="POST">
+
+                <h2 class="section-title">قائمة المواد المتاحة</h2>
+
+                <div class="controls"
+                    style="background: #fff; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 15px;">
+                    <div class="filter-group" style="width: 100%; display: flex; align-items: center; gap: 10px;">
+
+                        <label style="font-weight: bold;">تصفية المواد:</label>
+
+                        <select id="yearFilter" onchange="toggleDepartment(); filterSubjects()" style="width: 200px;">
+                            <option value="all">كل الفرق الدراسية</option>
+                            <option value="1">الفرقة الأولى</option>
+                            <option value="2">الفرقة الثانية</option>
+                            <option value="3">الفرقة الثالثة</option>
+                            <option value="4">الفرقة الرابعة</option>
+                        </select>
+
+                        <span id="deptWrapper" style="display: none;"> <select id="deptFilter"
+                                onchange="filterSubjects()" style="width: 200px;">
+                                <option value="all">كل الأقسام</option>
+                                <option value="CS">علوم الحاسب (CS)</option>
+                                <option value="IS">نظم المعلومات (IS)</option>
+                                <option value="IT">تكنولوجيا المعلومات (IT)</option>
+                                <option value="AI">الذكاء الاصطناعي (AI)</option>
+                            </select>
+                        </span>
+
+                        <input type="text" id="searchInput" onkeyup="filterSubjects()" placeholder="بحث باسم المادة..."
+                            style="flex: 1;">
+                    </div>
+                </div>
+
+                <div class="card">
+                    <table id="subjectsTable">
+                        <thead>
+                            <tr style="background: #f8fafc;">
+                                <th style="width: 50px;">اختر</th>
+                                <th>كود المادة</th>
+                                <th>اسم المقرر</th>
+                                <th>القسم</th>
+                                <th>الفرقة</th>
+                                <th>الساعات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="subject-row" data-year="4" data-dept="CS">
+                                <td><input type="checkbox" name="subjects[]" value="CS401"></td>
+                                <td>CS401</td>
+                                <td>أمن المعلومات</td>
+                                <td>علوم حاسب</td>
+                                <td>الرابعة</td>
+                                <td>3</td>
+                            </tr>
+
+                            <tr class="subject-row" data-year="4" data-dept="IS">
+                                <td><input type="checkbox" name="subjects[]" value="IS405"></td>
+                                <td>IS405</td>
+                                <td>تنقيب البيانات</td>
+                                <td>نظم معلومات</td>
+                                <td>الرابعة</td>
+                                <td>3</td>
+                            </tr>
+
+                            <tr class="subject-row" data-year="3" data-dept="CS">
+                                <td><input type="checkbox" name="subjects[]" value="CS302"></td>
+                                <td>CS302</td>
+                                <td>نظم تشغيل</td>
+                                <td>علوم حاسب</td>
+                                <td>الثالثة</td>
+                                <td>3</td>
+                            </tr>
+
+                            <tr class="subject-row" data-year="1" data-dept="IT">
+                                <td><input type="checkbox" name="subjects[]" value="IT101"></td>
+                                <td>IT101</td>
+                                <td>مقدمة في الحاسب</td>
+                                <td>تكنولوجيا معلومات</td>
+                                <td>الأولى</td>
+                                <td>2</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p id="noResults" style="display: none; text-align: center; padding: 20px; color: var(--muted);">
+                        لا توجد مواد مطابقة للبحث
+                    </p>
+                </div>
+
+                <div class="modal-actions"
+                    style="margin-top: 20px; border-top: none; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); position: sticky; bottom: 0;">
+                    <div style="margin-left: auto; display: flex; align-items: center; gap: 10px;">
+                        <span style="font-weight: bold; color: var(--primary);">عدد المواد المختارة: <span
+                                id="selectedCount" style="color: var(--accent);">0</span></span>
+                    </div>
+                    <button type="button" onclick="openDisclaimer()" class="btn add">
+                        <i class="fa-solid fa-check-circle"></i> تأكيد التسجيل
+                    </button>
+                </div>
+
+            </form>
+        </section>
+    </main>
+
+    <div id="disclaimerModal" class="modal-overlay">
+        <div class="modal" style="width: 500px; text-align: center;">
+
+            <div style="margin-bottom: 15px;">
+                <i class="fa-solid fa-triangle-exclamation" style="font-size: 50px; color: var(--warning);"></i>
+            </div>
+
+            <h3 style="justify-content: center; border: none; margin-bottom: 10px; color: var(--primary);">
+                إقرار مسؤولية التسجيل
+            </h3>
+
+            <div
+                style="background: #fff7ed; padding: 15px; border-radius: 8px; border: 1px solid #ffedd5; margin-bottom: 20px; text-align: right;">
+                <p style="margin: 0; color: #9a3412; font-size: 14px; line-height: 1.6;">
+                    <strong>عزيزي الطالب،</strong><br>
+                    بضغطك على "موافق"، فإنك تقر بأن اختيار هذه المواد تم بناءً على رغبتك الشخصية ومسؤوليتك الكاملة.
+                    <br><br>
+                    <i class="fa-solid fa-circle-info"></i> <strong>علماً بأن:</strong> هذا التسجيل يعتبر <span
+                        style="text-decoration: underline;">تسجيلاً مبدئياً</span>، ويخضع للمراجعة.
+                    <br>
+                    - في حالة مخالفة اللائحة أو وجود تعارض، <strong>سيتم رفض الطلب</strong>.
+                </p>
+            </div>
+
+            <div class="modal-actions" style="justify-content: center; border-top: none; padding-top: 0;">
+                <a href="#" onclick="closeDisclaimer()" class="btn-secondary">تراجع ومراجعة المواد</a>
+
+                <button type="button" onclick="submitFinalForm()" class="btn add"
+                    style="background-color: var(--primary);">
+                    <i class="fa-solid fa-check-double"></i> موافق، اعتمد التسجيل
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="successModal" class="modal-overlay">
+        <div class="modal" style="width: 400px; text-align: center; border-top: 5px solid #22c55e;">
+
+            <div style="margin-bottom: 20px; margin-top: 10px;">
+                <i class="fa-solid fa-circle-check fa-beat"
+                    style="font-size: 60px; color: #22c55e; --fa-animation-duration: 2s;"></i>
+            </div>
+
+            <h3 style="justify-content: center; border: none; margin-bottom: 10px; color: #15803d;">
+                تم إرسال الطلب بنجاح
+            </h3>
+
+            <p style="color: #64748b; margin-bottom: 25px; font-size: 15px;">
+                جاري مراجعة بياناتك واعتماد المواد .
+            </p>
+
+            <div class="modal-actions" style="justify-content: center; border-top: none; padding-top: 0;">
+                <button onclick="finishRegistration()" class="btn"
+                    style="background-color: #15803d; color: white; width: 100%;">
+                    حسناً، فهمت
+                </button>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        // دالة الفلترة
+        function filterSubjects() {
+            // 1. نجيب القيم من الفلاتر
+            const yearVal = document.getElementById('yearFilter').value;
+            const deptVal = document.getElementById('deptFilter').value;
+            const searchVal = document.getElementById('searchInput').value.toLowerCase();
+
+            // 2. نجيب كل صفوف الجدول
+            const rows = document.querySelectorAll('.subject-row');
+            let visibleCount = 0;
+
+            rows.forEach(row => {
+                // نجيب البيانات الخاصة بكل صف (المخزنة في data attributes)
+                const rowYear = row.getAttribute('data-year');
+                const rowDept = row.getAttribute('data-dept');
+                const rowText = row.innerText.toLowerCase(); // النص جوه الصف عشان البحث
+
+                // 3. نطبق شروط الفلترة
+                const yearMatch = (yearVal === 'all') || (yearVal === rowYear);
+                const deptMatch = (deptVal === 'all') || (deptVal === rowDept);
+                const searchMatch = rowText.includes(searchVal);
+
+                // 4. إظهار أو إخفاء الصف
+                if (yearMatch && deptMatch && searchMatch) {
+                    row.style.display = ''; // إظهار
+                    visibleCount++;
+                } else {
+                    row.style.display = 'none'; // إخفاء
+                }
+            });
+
+            // إظهار رسالة لو مفيش نتايج
+            document.getElementById('noResults').style.display = (visibleCount === 0) ? 'block' : 'none';
+        }
+
+        // دالة عد المواد المختارة (لتحسين الـ UX)
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        const countSpan = document.getElementById('selectedCount');
+
+        checkboxes.forEach(box => {
+            box.addEventListener('change', function () {
+                const selected = document.querySelectorAll('input[type="checkbox"]:checked').length;
+                countSpan.textContent = selected;
+            });
+        });
+
+        function toggleDepartment() {
+            const yearSelect = document.getElementById('yearFilter');
+            const deptWrapper = document.getElementById('deptWrapper');
+            const deptSelect = document.getElementById('deptFilter');
+
+            const selectedYear = yearSelect.value;
+
+            // الشرط: لو الفرقة 3 أو 4 (أو الكل) نظهر القسم
+            // لو الفرقة 1 أو 2 نخفيه
+
+            if (selectedYear === '3' || selectedYear === '4') {
+                deptWrapper.style.display = 'inline-block'; // إظهار
+            } else {
+                deptWrapper.style.display = 'none'; // إخفاء
+
+                // نقطة مهمة جداً:
+                // لما نخفي القسم، لازم نرجع قيمته لـ "كل الأقسام"
+                // عشان لو المستخدم كان مختار "CS" ورجع اختار "الفرقة الأولى"
+                // الفلتر ميفضلش شغال على CS ويطلع نتايج فاضية
+                deptSelect.value = 'all';
+            }
+        }
+
+        // تشغيل الدالة أول ما الصفحة تفتح عشان تظبط الوضع المبدئي
+        document.addEventListener('DOMContentLoaded', function () {
+            toggleDepartment();
+        });
+
+
+        // 1. فتح نافذة التنبيه
+        function openDisclaimer() {
+            // نتأكد الأول إن الطالب اختار مواد أصلاً
+            const selectedCount = document.querySelectorAll('input[type="checkbox"]:checked').length;
+
+            if (selectedCount === 0) {
+                alert("عفواً، يجب اختيار مادة واحدة على الأقل للتسجيل.");
+                return;
+            }
+
+            // لو مختار مواد، نفتح المودال
+            document.getElementById('disclaimerModal').style.display = 'flex';
+        }
+
+        // 2. إغلاق النافذة (لو حب يراجع تاني)
+        function closeDisclaimer() {
+            document.getElementById('disclaimerModal').style.display = 'none';
+        }
+
+        // 3. الإرسال النهائي (لما يوافق على المسؤولية)
+        function submitFinalForm() {
+            // هنا بنجيب الفورم ونعمله submit بجد
+            // افترضنا إن الفورم واخد id="registrationForm"
+            // لو مش واخد id، ضيف id="registrationForm" لتاج الـ <form> فوق
+            document.querySelector('form').submit();
+        }
+
+
+        // دالة عرض نافذة النجاح (بدون عداد وقت)
+        function submitFinalForm() {
+            // 1. إخفاء نافذة الإقرار (Disclaimer)
+            document.getElementById('disclaimerModal').style.display = 'none';
+
+            // 2. إظهار نافذة النجاح (Success) وتفضل ثابتة
+            document.getElementById('successModal').style.display = 'flex';
+        }
+
+        // دالة الإنهاء (تتنفذ لما تضغط على زر "حسناً")
+        function finishRegistration() {
+            // إخفاء نافذة النجاح
+            document.getElementById('successModal').style.display = 'none';
+        }
+
+    </script>
+</body>
+
+</html>
