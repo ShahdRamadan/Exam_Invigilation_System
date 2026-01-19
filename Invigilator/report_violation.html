@@ -12,14 +12,46 @@
 
 <body class="violation-page">
 
-    <div id="print-header">
-        <img src="../Images/UNI_LOGO.png" alt="شعار الجامعة" style="width: 80px; margin-bottom: 10px;">
-        <h2 style="margin: 0; font-size: 24px;">جامعة الغردقة</h2>
-        <h3 style="margin: 5px 0 0; font-size: 18px; font-weight: normal;">شئون التعليم والطلاب - مذكرة إثبات حالة غش /
-            مخالفة</h3>
-        <p style="margin-top: 10px;">
-            العام الجامعي <span id="academic_year_print">... / ...</span>
-        </p>
+    <div id="print-header" style="margin-bottom: 25px;">
+        <div
+            style="border: 1px solid #777; padding: 5px; display: flex; align-items: stretch; justify-content: space-between; direction: rtl; min-height: 100px;">
+
+            <div
+                style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; border-left: 1px solid #777; padding: 0 10px;">
+                <h2 style="margin: 0 0 8px; font-size: 22px; font-weight: bold; color: #000;">
+                    جامعة الغردقة
+                </h2>
+                <div style="height: 1px; background: #777; width: 95%; margin: 0 auto 8px;"></div>
+                <h3 style="margin: 0; font-size: 18px; font-weight: normal; color: #000;">
+                    كلية الحاسبات والذكاء الاصطناعي
+                </h3>
+            </div>
+
+            <div style="width: 140px; display: flex; align-items: center; justify-content: center; padding: 5px;">
+                <img src="../Images/UNI_LOGO.png" alt="شعار الجامعة" style="width: 90px; height: auto;">
+            </div>
+
+            <div
+                style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; border-right: 1px solid #777; padding: 0 10px; direction: ltr;">
+                <h2 style="margin: 0 0 8px; font-size: 20px; font-weight: bold; color: #000;">
+                    Hurghada University
+                </h2>
+                <div style="height: 1px; background: #777; width: 95%; margin: 0 auto 8px;"></div>
+                <h3 style="margin: 0; font-size: 16px; font-weight: normal; color: #000;">
+                    Faculty of Computers & Artificial Intelligence
+                </h3>
+            </div>
+
+        </div>
+
+        <div style="text-align: center; margin-top: 20px;">
+            <h3 style="margin: 5px 0 0; font-size: 20px; font-weight: bold;">
+                مذكرة إثبات حالة غش / مخالفة
+            </h3>
+            <p style="margin-top: 10px; font-size: 16px; font-weight: bold;">
+                العام الجامعي <span id="academic_year_print">... / ...</span>
+            </p>
+        </div>
     </div>
     <aside class="sidebar">
         <div>
@@ -290,8 +322,6 @@
 
         // استدعاء الدالة عند تحميل الصفحة
         document.addEventListener('DOMContentLoaded', function () {
-            // ... (أكوادك السابقة الخاصة بالتاريخ والوقت) ...
-
             updateAcademicDates(); // تشغيل الدالة
         });
     </script>
